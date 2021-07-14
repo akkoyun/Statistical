@@ -44,11 +44,11 @@ void Statistical::Stream_Clear(void) {
 	Data_Count = 0;
 
 }
-float Statistical::Array_Average(float _Data[], uint8_t _AVG_Type) {
+float Statistical::Array_Average(float _Data[], uint8_t _Data_Count, uint8_t _AVG_Type) {
 
 	// Calculate Array Max
 	float _Max = float(_Data[0]);
-	for (int i=0; i < sizeof(_Data) - 1; i++) {
+	for (int i=0; i < _Data_Count - 1; i++) {
 		
 		if (_Data[i] > _Max) _Max = float(_Data[i]);
 		
@@ -56,7 +56,7 @@ float Statistical::Array_Average(float _Data[], uint8_t _AVG_Type) {
 	
 	// Calculate Array Min
 	float _Min = float(_Data[0]);
-	for (int i=0; i < sizeof(_Data) - 1; i++) {
+	for (int i=0; i < _Data_Count - 1; i++) {
 		
 		if (float(_Data[i]) < _Min) _Min = float(_Data[i]);
 		
@@ -64,21 +64,21 @@ float Statistical::Array_Average(float _Data[], uint8_t _AVG_Type) {
 
 	// Calculate Array Average
 	float _Avg = 0;
-	for (int i=0; i < sizeof(_Data) - 1; i++) {
+	for (int i=0; i < _Data_Count - 1; i++) {
 		
 		_Avg += float(_Data[i]);
 		
 	}
-	_Avg /= sizeof(_Data);
+	_Avg /= _Data_Count;
 
 	// Calculate Array Standart Deviation
 	float _SDev = 0;
-	for (int i=0; i < sizeof(_Data) - 1; i++) {
+	for (int i=0; i < _Data_Count - 1; i++) {
 		
 		_SDev += (float(_Data[i]) - _Avg) * (float(_Data[i]) - _Avg);
 		
 	}
-	_SDev = sqrt(_SDev/sizeof(_Data));
+	_SDev = sqrt(_SDev/_Data_Count);
 
 	// Define Calculation Variables
 	float _Data_Sum = 0;
@@ -87,7 +87,7 @@ float Statistical::Array_Average(float _Data[], uint8_t _AVG_Type) {
 
 
 	// Calculate Average Data
-	for (int Calculation_ID = 0; Calculation_ID < sizeof(_Data) - 1; Calculation_ID++) {
+	for (int Calculation_ID = 0; Calculation_ID < _Data_Count - 1; Calculation_ID++) {
 	 
 		// Calculate RMS/EXRMS Average
 		if (_AVG_Type == 2 or _AVG_Type == 3) {

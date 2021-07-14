@@ -21,7 +21,7 @@ void loop() {
 	DataSet1.Stream_Statistic(132.2);
 
 	float Data_Array[] = {2.3, 3.5, 8.9, 11.25, 1.2};
-	float _Average = DataSet2.Array_Average(Data_Array, 2);
+	float _Average = DataSet2.Array_Average(Data_Array,5,2);
 
 	// Datas
 	Serial.print(DataSet1.Data_Count); Serial.println(" Point Stream Statistic Calculation...");

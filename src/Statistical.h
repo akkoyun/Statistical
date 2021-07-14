@@ -31,7 +31,7 @@ public:
 	// ************************************************************
 	void Stream_Statistic(float _Data);
 	void Stream_Clear(void);
-	float Array_Average(float _Data[], uint8_t _AVG_Type);
+	float Array_Average(float _Data[], uint8_t _Data_Count, uint8_t _AVG_Type);
 
 private:
 
