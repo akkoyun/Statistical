@@ -23,8 +23,8 @@
 	},
 	"examples": [
 		{
-			"name": "Stream Stats",
-			"base": "examples/Stream",
+			"name": "Stream",
+			"base": "examples/Stream/",
 			"files": [
 				"Stream.ino"
 			]
