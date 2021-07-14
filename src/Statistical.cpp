@@ -26,7 +26,7 @@ void Statistical::Stream_Statistic(float _Data) {
 
 	// Calculate Avg Value
 	if (Stream_Average == 0) Stream_Average = _Data;
-	Stream_Average = Stream_Average + ((_Data - Stream_Average) / Data_Count)
+	Stream_Average = Stream_Average + ((_Data - Stream_Average) / Data_Count);
 
 }
 void Statistical::Stream_Clear(void) {
