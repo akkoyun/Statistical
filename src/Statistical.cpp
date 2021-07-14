@@ -44,4 +44,124 @@ void Statistical::Stream_Clear(void) {
 	Data_Count = 0;
 
 }
+float Statistical::Array_Average(float _Data[], uint8_t _AVG_Type) {
 
+	// Calculate Array Max
+	float _Max = float(_Data[0]);
+	for (int i=0; i < sizeof(_Data) - 1; i++) {
+		
+		if (_Data[i] > _Max) _Max = float(_Data[i]);
+		
+	}
+	
+	// Calculate Array Min
+	float _Min = float(_Data[0]);
+	for (int i=0; i < sizeof(_Data) - 1; i++) {
+		
+		if (float(_Data[i]) < _Min) _Min = float(_Data[i]);
+		
+	}
+
+	// Calculate Array Average
+	float _Avg = 0;
+	for (int i=0; i < sizeof(_Data) - 1; i++) {
+		
+		_Avg += float(_Data[i]);
+		
+	}
+	_Avg /= sizeof(_Data);
+
+	// Calculate Array Standart Deviation
+	float _SDev = 0;
+	for (int i=0; i < sizeof(_Data) - 1; i++) {
+		
+		_SDev += (float(_Data[i]) - _Avg) * (float(_Data[i]) - _Avg);
+		
+	}
+	_SDev = sqrt(_SDev/sizeof(_Data));
+
+	// Define Calculation Variables
+	float _Data_Sum = 0;
+	int _Valid_Data_Count = 0;
+	int _Sigma_1_Count = 0;
+
+
+	// Calculate Average Data
+	for (int Calculation_ID = 0; Calculation_ID < _Read_Count; Calculation_ID++) {
+	 
+		// Calculate RMS/EXRMS Average
+		if (_AVG_Type == 2 or _AVG_Type == 3) {
+			
+			// Calculate Sum
+			_Data_Sum += sq(float(_Data[Calculation_ID]));
+			
+			// Calculate Valid Data Count
+			_Valid_Data_Count++;
+			
+		}
+		
+		// Calulate Sigma1 Average
+		if (_AVG_Type == 5) {
+			
+			float _Sigma_1_Max = _Avg + _SDev;
+			float _Sigma_1_Min = _Avg - _SDev;
+			
+			if (_Data[Calculation_ID] >= _Sigma_1_Min and _Data[Calculation_ID] <= _Sigma_1_Max) {
+				
+				// Calculate Sum
+				_Data_Sum += sq(_Data[Calculation_ID]);
+				
+				// Calculate Valid Data Count
+				_Valid_Data_Count++;
+				
+			}
+			
+		}
+	
+	}
+		
+	// Control for Valid Data
+	if (_AVG_Type != 1 and _Valid_Data_Count < 1) return(0);
+		
+	// Calculate Average
+	if (_AVG_Type == 1) {
+		
+		// Calculate Average
+		return(_Avg);
+		
+	}	// Standart Average
+	if (_AVG_Type == 2) {
+		
+		// Calculate Average
+		return(sqrt(_Data_Sum / _Valid_Data_Count));
+
+	}	// RMS Average
+	if (_AVG_Type == 3) {
+		
+		// Eleminate Max Value
+		_Data_Sum -= (_Max * _Max);
+		
+		// Eleminate Min Value
+		_Data_Sum -= (_Min * _Min);
+		
+		// Eleminate Min/Max Valid Data Count
+		_Valid_Data_Count -= 2;
+		
+		// Calculate Average
+		return(sqrt(_Pressure_Sum / _Valid_Data_Count));
+
+	}	// Extendet RMS Average
+	if (_AVG_Type == 4) {
+		
+		// Calculate Average
+		return((_Max + _Min) / 2);
+		
+	}	// Median Average
+	if (_AVG_Type == 5) {
+		
+		// Calculate Average
+		return(sqrt(_Data_Sum / _Valid_Data_Count));
+		
+	}	// Sigma1RMS Average
+		
+}
