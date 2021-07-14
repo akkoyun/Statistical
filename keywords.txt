@@ -1,0 +1,25 @@
+#######################################
+# Syntax Coloring Map For Statistical
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+Stats							KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+Stream_Statistic				KEYWORD2
+Stream_Clear					KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+Stream_Average 					LITERAL1
+Stream_Minimum 					LITERAL1
+Stream_Maximum 					LITERAL1
+Data_Count						LITERAL1

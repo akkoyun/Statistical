@@ -1,0 +1,33 @@
+{
+	"name": "Statistical",
+	"version": "1.0.0",
+	"keywords": "Statistical, Max, Min, Average",
+	"description": "Function calculates statistical parameters of data stream",
+	"authors":
+	{
+		"name": "Mehmet Gunce Akkoyun",
+		"email": "akkoyun@me.com",
+		"url": ""
+	},
+	"license": "MIT",
+	"frameworks": "arduino",
+	"platforms":
+	[
+		"atmelavr",
+		"atmelmegaavr"
+	],
+	"repository":
+	{
+		"type": "git",
+		"url": "https://github.com/akkoyun/Statistical.git"
+	},
+	"examples": [
+		{
+			"name": "Linear Regression",
+			"base": "examples/Linear",
+			"files": [
+				"Linear.ino"
+			]
+		}
+	]
+}
