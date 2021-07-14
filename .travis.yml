@@ -10,8 +10,11 @@ install:
 
 env:
 - BOARD=megaatmega2560
+  global:
+  - PRETTYNAME="Stream Data Statistic Library"
 
 script:
 - for e in examples/*; do
     platformio ci --board=$BOARD --lib=. $e/*;
   done
+
