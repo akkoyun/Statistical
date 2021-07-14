@@ -44,23 +44,25 @@ void Statistical::Stream_Clear(void) {
 	Data_Count = 0;
 
 }
-void Statistical::Array_Average(float _Data[], int _Data_Count, int _AVG_Type) {
+void Statistical::Array_Statistic(float _Data[], int _Data_Count, int _AVG_Type) {
 
 	// Calculate Array Max
-	Array_Maximum = float(_Data[0]);
+	float _Max = float(_Data[0]);
 	for (int i=0; i < _Data_Count; i++) {
 		
 		if (_Data[i] > _Max) _Max = float(_Data[i]);
 		
 	}
+	Array_Maximum = _Max;
 	
 	// Calculate Array Min
-	Array_Minimum = float(_Data[0]);
+	float _Min = float(_Data[0]);
 	for (int i=0; i < _Data_Count; i++) {
 		
 		if (float(_Data[i]) < _Min) _Min = float(_Data[i]);
 		
 	}
+	Array_Minimum = _Min;
 
 	// Calculate Array Average
 	float _Avg = 0;
@@ -72,13 +74,14 @@ void Statistical::Array_Average(float _Data[], int _Data_Count, int _AVG_Type) {
 	_Avg /= _Data_Count;
 
 	// Calculate Array Standart Deviation
-	_SDev = 0;
+	float _SDev = 0;
 	for (int i=0; i < _Data_Count; i++) {
 		
 		_SDev += sq(_Data[i] - _Avg);
 				  		
 	}
-	Array_SDev = sqrt(_SDev/(_Data_Count-1));
+	_SDev = sqrt(_SDev/(_Data_Count-1));
+	Array_SDev = _SDev;
 
 	// Define Calculation Variables
 	float _Data_Sum = 0;
