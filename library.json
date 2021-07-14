@@ -23,10 +23,10 @@
 	},
 	"examples": [
 		{
-			"name": "Linear Regression",
-			"base": "examples/Linear",
+			"name": "Stream Stats",
+			"base": "examples/Stream",
 			"files": [
-				"Linear.ino"
+				"Stream.ino"
 			]
 		}
 	]
