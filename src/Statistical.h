@@ -24,6 +24,10 @@ public:
 	float 			Stream_Minimum 		= 0;
 	float 			Stream_Maximum 		= 0;
 	uint16_t		Data_Count			= 0;
+	float 			Array_Average 		= 0;
+	float 			Array_SDev 			= 0;
+	float 			Array_Minimum 		= 0;
+	float 			Array_Maximum 		= 0;
 
 	
 	// ************************************************************
@@ -31,7 +35,7 @@ public:
 	// ************************************************************
 	void Stream_Statistic(float _Data);
 	void Stream_Clear(void);
-	float Array_Average(float *_Data[], uint8_t _Data_Count, uint8_t _AVG_Type);
+	void Array_Average(float _Data[], int _Data_Count, int _AVG_Type);
 	
 private:
 
