@@ -87,7 +87,7 @@ float Statistical::Array_Average(float _Data[], uint8_t _AVG_Type) {
 
 
 	// Calculate Average Data
-	for (int Calculation_ID = 0; Calculation_ID < _Read_Count; Calculation_ID++) {
+	for (int Calculation_ID = 0; Calculation_ID < sizeof(_Data) - 1; Calculation_ID++) {
 	 
 		// Calculate RMS/EXRMS Average
 		if (_AVG_Type == 2 or _AVG_Type == 3) {
@@ -148,7 +148,7 @@ float Statistical::Array_Average(float _Data[], uint8_t _AVG_Type) {
 		_Valid_Data_Count -= 2;
 		
 		// Calculate Average
-		return(sqrt(_Pressure_Sum / _Valid_Data_Count));
+		return(sqrt(_Data_Sum / _Valid_Data_Count));
 
 	}	// Extendet RMS Average
 	if (_AVG_Type == 4) {
