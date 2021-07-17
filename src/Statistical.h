@@ -23,7 +23,7 @@ public:
 	float 			Stream_Average 		= 0;
 	float 			Stream_Minimum 		= 0;
 	float 			Stream_Maximum 		= 0;
-	uint16_t		Data_Count			= 0;
+	int				Data_Count			= 0;
 	float 			Array_Average 		= 0;
 	float 			Array_SDev 			= 0;
 	float 			Array_Minimum 		= 0;
