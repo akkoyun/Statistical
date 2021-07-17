@@ -8,7 +8,6 @@
  *
  *********************************************************************************/
 
-#include "Arduino.h"
 #include "Statistical.h"
 
 void Statistical::Stream_Statistic(float _Data) {
@@ -167,3 +166,5 @@ void Statistical::Array_Statistic(float _Data[], int _Data_Count, int _AVG_Type)
 	}	// Sigma1RMS Average
 		
 }
+
+Statistical Stats;

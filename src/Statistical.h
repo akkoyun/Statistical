@@ -11,7 +11,10 @@
 #ifndef __Statistical__
 #define __Statistical__
 
+// Define Arduino Library
+#ifndef __Arduino__
 #include <Arduino.h>
+#endif
 
 class Statistical {
 
@@ -49,5 +52,7 @@ private:
 	// ************************************************************
 
 };
+
+extern Statistical Stats;
 
 #endif /* defined(__Statistical__) */
