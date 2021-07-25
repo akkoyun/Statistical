@@ -122,7 +122,7 @@ void Statistical::Array_Statistic(float _Data[], int _Data_Count, int _AVG_Type)
 	}
 
 	// Control for Valid Data
-	if (_AVG_Type != 1 and _AVG_Type != 4 and _Valid_Data_Count < 1) return(0);
+	if (_AVG_Type != 1 and _AVG_Type != 4 and _Valid_Data_Count < 1) Array_Average = 0;
 
 	// Calculate Average
 	if (_AVG_Type == 1) {
