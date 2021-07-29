@@ -43,7 +43,7 @@ void Statistical::Stream_Clear(void) {
 	Data_Count = 0;
 
 }
-void Statistical::Array_Statistic(float _Data[], int _Data_Count, int _AVG_Type) {
+void Statistical::Array_Statistic(double _Data[], int _Data_Count, int _AVG_Type) {
 
 	// Calculate Array Max
 	float _Max = float(_Data[0]);
