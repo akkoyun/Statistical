@@ -38,7 +38,7 @@ public:
 	// ************************************************************
 	void Stream_Statistic(float _Data);
 	void Stream_Clear(void);
-	void Array_Statistic(double _Data[], int _Data_Count, int _AVG_Type);
+	void Array_Statistic(float _Data[], int _Data_Count, int _AVG_Type);
 	
 private:
 
