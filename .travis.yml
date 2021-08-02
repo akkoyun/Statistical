@@ -20,7 +20,7 @@ env:
      - PRETTYNAME="Statistic Library for Sensors"
 
 before_install:
-   - source <(curl -SLs https://raw.githubusercontent.com/akkoyun/Statistical/master/install.sh)
+   - source <(curl -SLs https://raw.githubusercontent.com/akkoyun/Statistical/01.01.01/install.sh)
 
 script:
    - build_main_platforms
