@@ -13,13 +13,29 @@ Stats							KEYWORD1
 #######################################
 
 Stream_Statistic				KEYWORD2
-Stream_Clear					KEYWORD2
-
+Data_Clear						KEYWORD2
+Array_Statistic					KEYWORD2
+LinearRegression				KEYWORD2
+		
 #######################################
 # Constants (LITERAL1)
 #######################################
 
-Stream_Average 					LITERAL1
-Stream_Minimum 					LITERAL1
-Stream_Maximum 					LITERAL1
 Data_Count						LITERAL1
+Stream_Average					LITERAL1
+Stream_Minimum					LITERAL1
+Stream_Maximum					LITERAL1
+Array_Average					LITERAL1
+Array_SDev						LITERAL1
+Array_Minimum					LITERAL1
+Array_Maximum					LITERAL1
+Linear_Regression_MeanX			LITERAL1
+Linear_Regression_MeanX2		LITERAL1
+Linear_Regression_VarianceX		LITERAL1
+Linear_Regression_MeanY			LITERAL1
+Linear_Regression_MeanY2		LITERAL1
+Linear_Regression_MeanXY		LITERAL1
+Linear_Regression_VarianceY		LITERAL1
+Linear_Regression_CovarianceXY	LITERAL1
+Linear_Regression_a				LITERAL1
+Linear_Regression_b				LITERAL1
