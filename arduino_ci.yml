@@ -1,2 +1,0 @@
-- name: arduino_ci
-  uses: Arduino-CI/action@v0.1.0
