@@ -31,7 +31,7 @@
 		},
 		{
 			"name": "Stream",
-			"base": "examples/Linear Regression/",
+			"base": "examples/Regression/",
 			"files": [
 				"Regression.ino"
 			]
