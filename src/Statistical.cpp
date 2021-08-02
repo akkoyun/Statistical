@@ -4,7 +4,7 @@
  *
  *	Library				: Data Stream Statistical Library
  *	Code Developer		: Mehmet Gunce Akkoyun (akkoyun@me.com)
- *	Revision			: 01.00.00
+ *	Revision			: 01.01.01
  *
  *********************************************************************************/
 
@@ -26,21 +26,6 @@ void Statistical::Stream_Statistic(float _Data) {
 	// Calculate Avg Value
 	if (Stream_Average == 0) Stream_Average = _Data;
 	Stream_Average = Stream_Average + ((_Data - Stream_Average) / Data_Count);
-
-}
-void Statistical::Stream_Clear(void) {
-
-	// Celar Average
-	Stream_Average = 0;
-
-	// Clear Max
-	Stream_Maximum = 0;
-
-	// Clear Min
-	Stream_Minimum = 0;
-
-	// Clear Data Count
-	Data_Count = 0;
 
 }
 void Statistical::Array_Statistic(float _Data[], int _Data_Count, int _AVG_Type) {
@@ -165,6 +150,66 @@ void Statistical::Array_Statistic(float _Data[], int _Data_Count, int _AVG_Type)
 		
 	}	// Sigma1RMS Average
 		
+}
+void Statistical::LinearRegression(float _X, float _Y){
+
+	// Increase Data Count Variable
+	Data_Count++;
+	
+	// Calculate Mean X
+	Linear_Regression_MeanX = Linear_Regression_MeanX + ((_X - Linear_Regression_MeanX) / Data_Count);
+
+	// Calculate Mean X Square
+	Linear_Regression_MeanX2 = Linear_Regression_MeanX2 + (((_X * _X) - Linear_Regression_MeanX2) / Data_Count);
+	
+	// Calculate Variance X
+	Linear_Regression_VarianceX = Linear_Regression_MeanX2 - (Linear_Regression_MeanX * Linear_Regression_MeanX);
+
+	// Calculate Mean Y
+	Linear_Regression_MeanY = Linear_Regression_MeanY + ((_Y - Linear_Regression_MeanY) / Data_Count);
+
+	// Calculate Mean Y Square
+	Linear_Regression_MeanY2 = Linear_Regression_MeanY2 + (((_Y * _Y) - Linear_Regression_MeanY2) / Data_Count);
+	
+	// Calculate Variance Y
+	Linear_Regression_VarianceY = Linear_Regression_MeanY2 - (Linear_Regression_MeanY * Linear_Regression_MeanY);
+
+	// Calculate Mean XY
+	Linear_Regression_MeanXY = Linear_Regression_MeanXY + (((_X * _Y) - Linear_Regression_MeanXY) / Data_Count);
+
+	// Calculate Covariance XY
+	Linear_Regression_CovarianceXY = Linear_Regression_MeanXY - (Linear_Regression_MeanX * Linear_Regression_MeanY);
+
+	// Calculate a
+	Linear_Regression_a = Linear_Regression_CovarianceXY / Linear_Regression_VarianceX;
+	
+	// Calculate b
+	Linear_Regression_b = Linear_Regression_MeanY - (Linear_Regression_a * Linear_Regression_MeanX);
+	
+}
+void Statistical::Data_Clear(void) {
+
+	// Clear Data Count
+	Data_Count = 0;
+
+	// Celar Stream Variables
+	Stream_Average = 0;
+	Stream_Maximum = 0;
+	Stream_Minimum = 0;
+
+	// Clear Regression Variables
+	Linear_Regression_MeanX = 0;
+	Linear_Regression_MeanX2 = 0;
+	Linear_Regression_VarianceX = 0;
+	Linear_Regression_MeanY = 0;
+	Linear_Regression_MeanY2 = 0;
+	Linear_Regression_MeanXY = 0;
+	Linear_Regression_VarianceY = 0;
+	Linear_Regression_CovarianceXY = 0;
+	Linear_Regression_a = 0;
+	Linear_Regression_b	= 0;
+
+	
 }
 
 Statistical Stats;

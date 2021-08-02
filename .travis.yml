@@ -11,7 +11,7 @@ install:
 env:
 - BOARD=megaatmega2560
   global:
-  - PRETTYNAME="Stream Data Statistic Library"
+  - PRETTYNAME="Statistic Library for Sensors"
 
 script:
 - for e in examples/*; do

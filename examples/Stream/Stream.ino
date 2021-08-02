@@ -27,7 +27,7 @@ void loop() {
     Serial.println("----------------");
 
 	// Reset
-	DataSet.Stream_Clear();
+	DataSet.Data_Clear();
     
     delay(1000);
     
