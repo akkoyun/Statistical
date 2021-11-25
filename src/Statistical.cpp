@@ -4,7 +4,7 @@
  *
  *	Library				: Data Stream Statistical Library
  *	Code Developer		: Mehmet Gunce Akkoyun (akkoyun@me.com)
- *	Revision			: 01.01.01
+ *	Revision			: 01.01.02
  *
  *********************************************************************************/
 
