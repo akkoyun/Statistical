@@ -1,0 +1,56 @@
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "/Users/gunceakkoyun_macmini/Documents/Arduino/**",
+                "/users/gunceakkoyun_macmini/documents/arduino/libraries/**",
+                "/users/gunceakkoyun_macmini/documents/arduino/hardware/**",
+                "/Applications/Arduino.app/**",
+                "/Users/gunceakkoyun_macmini/.platformio/packages/framework-arduino-avr/cores/arduino",
+                "/Users/gunceakkoyun_macmini/.platformio/packages/framework-arduino-avr/variants/mega",
+                "/Users/gunceakkoyun_macmini/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                "/Users/gunceakkoyun_macmini/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                "/Users/gunceakkoyun_macmini/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                "/Users/gunceakkoyun_macmini/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                "/Users/gunceakkoyun_macmini/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "/Users/gunceakkoyun_macmini/Documents/Arduino/**",
+                    "/users/gunceakkoyun_macmini/documents/arduino/libraries/**",
+                    "/users/gunceakkoyun_macmini/documents/arduino/hardware/**",
+                    "/Applications/Arduino.app/**",
+                    "/Users/gunceakkoyun_macmini/.platformio/packages/framework-arduino-avr/cores/arduino",
+                    "/Users/gunceakkoyun_macmini/.platformio/packages/framework-arduino-avr/variants/mega",
+                    "/Users/gunceakkoyun_macmini/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                    "/Users/gunceakkoyun_macmini/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                    "/Users/gunceakkoyun_macmini/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                    "/Users/gunceakkoyun_macmini/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                    "/Users/gunceakkoyun_macmini/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=50203",
+                "ARDUINO_AVR_MEGA2560",
+                "F_CPU=7372800L",
+                "ARDUINO_ARCH_AVR",
+                "ARDUINO=10808",
+                "__AVR_ATmega2560__",
+                ""
+            ],
+            "macFrameworkPath": [
+                "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+            ],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c17",
+            "cppStandard": "c++98",
+            "intelliSenseMode": "macos-clang-arm64"
+        }
+    ],
+
+    "version": 4
+}

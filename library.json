@@ -7,10 +7,11 @@
 	{
 		"name": "Mehmet Gunce Akkoyun",
 		"email": "akkoyun@me.com",
-		"url": ""
+		"url": "https://github.com/akkoyun"
 	},
 	"license": "MIT",
 	"frameworks": "arduino",
+	"headers": "Statistical.h",
 	"platforms":
 	[
 		"atmelavr",
@@ -31,7 +32,7 @@
 		},
 		{
 			"name": "Stream",
-			"base": "examples/Linear Regression/",
+			"base": "examples/Regression/",
 			"files": [
 				"Regression.ino"
 			]
