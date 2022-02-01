@@ -39,6 +39,8 @@ public:
 	float 			Array_GAvg	 						= 0;
 	float 			Array_RMS_Avg 						= 0;
 	float 			Array_Ext_RMS_Avg					= 0;
+	float 			Array_Sigma_Avg 					= 0;
+	uint16_t		Array_Sigma_Size 					= 0;
 	float 			Array_Med							= 0;
 	float 			Array_SDev 							= 0;
 	float 			Array_SDev_Err						= 0;
@@ -64,11 +66,13 @@ public:
 	void LinearRegression(float _X, float _Y);
 	
 	void Array_Statistic(float _Data[], int _Data_Count);
+	float Array_Average(float _Data[], uint16_t _Data_Count, uint8_t _Average_Type);
 	void Array_Total(float _Data[], uint16_t _Data_Count);
 	void Array_Sq_Total(float _Data[], uint16_t _Data_Count);
 	void Array_Maximum(float _Data[], uint16_t _Data_Count);
 	void Array_Minimum(float _Data[], uint16_t _Data_Count);
 	void Array_Aritmetic_Average(float _Data[], uint16_t _Data_Count);
+	void Array_Sigma_Aritmetic_Average(float _Data[], uint16_t _Data_Count, uint8_t _Sigma);
 	void Array_Geometric_Average(float _Data[], uint16_t _Data_Count);
 	void Array_Standart_Deviation(float _Data[], uint16_t _Data_Count);
 	void Array_Standart_Deviation_Error(float _Data[], uint16_t _Data_Count);

@@ -12,19 +12,23 @@ void loop() {
 
 	// Set Data
 	Serial.println("Learning Data...");
-	float Data_Array[7] = {220.14, 221.36, 218.21, 217.6, 215.7, 225.8, 220.14 };
+	float Data_Array[9] = {220.14, 221.36, 218.21, 217.6, 215.7, 225.8, 220.14, 217.28, 223.94 };
+	uint16_t Data_Size = sizeof(Data_Array) / sizeof(Data_Array[0]);
 
 	// Print Array
-	Serial.print("Data Array : ");
-	for (uint8_t i = 0; i < sizeof(Data_Array); i++) {
+	Serial.print("Data Array                     : ");
+	for (uint8_t i = 0; i < Data_Size; i++) {
         Serial.print("[");
         Serial.print(Data_Array[i]);
         Serial.print("] ");
 	}
 	Serial.println("");
 
+	// Print Stats
+	Serial.print("Array Size                     : "); Serial.println(Data_Size);
+
 	// Calculate Array Statistics
-	Stats.Array_Statistic(Data_Array, sizeof(Data_Array));
+	Stats.Array_Statistic(Data_Array, Data_Size);
 
 	// Print Stats
 	Serial.print("Array Sum                      : "); Serial.println(Stats.Array_Sum);
@@ -35,13 +39,15 @@ void loop() {
 	Serial.print("Array Geometric Average        : "); Serial.println(Stats.Array_GAvg);
 	Serial.print("Array RMS Average              : "); Serial.println(Stats.Array_RMS_Avg);
 	Serial.print("Array Extended RMS Average     : "); Serial.println(Stats.Array_Ext_RMS_Avg);
+	Serial.print("Array 1 Sigma Size             : "); Serial.println(Stats.Array_Sigma_Size);
+	Serial.print("Array 1 Sigma Average          : "); Serial.println(Stats.Array_Sigma_Avg);
 	Serial.print("Array Median                   : "); Serial.println(Stats.Array_Med);
 	Serial.print("Array Standart Deviation       : "); Serial.println(Stats.Array_SDev);
 	Serial.print("Array Standart Deviation Error : "); Serial.println(Stats.Array_SDev_Err);
 	Serial.print("Array Coefficient Factor       : "); Serial.println(Stats.Array_Coef);
 
 	Serial.print("Sorted Data Array              : ");
-	for (uint8_t i = 0; i < sizeof(Data_Array); i++) {
+	for (uint8_t i = 0; i < Data_Size; i++) {
         Serial.print("[");
         Serial.print(Data_Array[i]);
         Serial.print("] ");
@@ -53,7 +59,7 @@ void loop() {
 
 	Serial.println("--------------------------------------------------");
 
-    delay(2000);
+    delay(5000);
 
 }
 
