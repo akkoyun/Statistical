@@ -4,8 +4,6 @@
  *
  *	Library				: Linear Regression Library
  *	Code Developer		: Mehmet Gunce Akkoyun (akkoyun@me.com)
- *	Revision			: 01.01.02
- *
  *********************************************************************************/
 
 #ifndef __Statistical__
@@ -25,7 +23,7 @@ public:
 	// ************************************************************
 
 	// Data Count Definations
-	int				Data_Count							= 0;
+	uint16_t		Data_Count							= 0;
 
 	// Stream Data Definations
 	float 			Stream_Average 						= 0;
@@ -33,10 +31,18 @@ public:
 	float 			Stream_Maximum 						= 0;
 	
 	// Array Data Definations
-	float 			Array_Average 						= 0;
+	float 			Array_Sum 							= 0;
+	float 			Array_Sq_Sum						= 0;
+	float 			Array_Min 							= 0;
+	float 			Array_Max	 						= 0;
+	float 			Array_AAvg	 						= 0;
+	float 			Array_GAvg	 						= 0;
+	float 			Array_RMS_Avg 						= 0;
+	float 			Array_Ext_RMS_Avg					= 0;
+	float 			Array_Med							= 0;
 	float 			Array_SDev 							= 0;
-	float 			Array_Minimum 						= 0;
-	float 			Array_Maximum 						= 0;
+	float 			Array_SDev_Err						= 0;
+	float 			Array_Coef							= 0;
 
 	// Linear Regression Definations
 	float 			Linear_Regression_MeanX				= 0;
@@ -55,9 +61,24 @@ public:
 	// ************************************************************
 	void Stream_Statistic(float _Data);
 	void Data_Clear(void);
-	void Array_Statistic(float _Data[], int _Data_Count, int _AVG_Type);
 	void LinearRegression(float _X, float _Y);
 	
+	void Array_Statistic(float _Data[], int _Data_Count, int _AVG_Type);
+	void Array_Total(float _Data[], uint16_t _Data_Count);
+	void Array_Sq_Total(float _Data[], uint16_t _Data_Count);
+	void Array_Maximum(float _Data[], uint16_t _Data_Count);
+	void Array_Minimum(float _Data[], uint16_t _Data_Count);
+	void Array_Aritmetic_Average(float _Data[], uint16_t _Data_Count);
+	void Array_Geometric_Average(float _Data[], uint16_t _Data_Count);
+	void Array_Standart_Deviation(float _Data[], uint16_t _Data_Count);
+	void Array_Standart_Deviation_Error(float _Data[], uint16_t _Data_Count);
+	void Array_Coefficient_Factor(float _Data[], uint16_t _Data_Count);
+	void Array_Bubble_Sort(float _Data[], uint16_t _Data_Count);
+	void Array_Median(float _Data[], uint16_t _Data_Count);
+	void Array_RMS_Average(float _Data[], uint16_t _Data_Count);
+	void Array_Ext_RMS_Average(float _Data[], uint16_t _Data_Count);
+	void Array_Statistic_Clear(void);
+
 private:
 
 	// ************************************************************
