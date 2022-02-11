@@ -79,6 +79,8 @@ public:
 	void Array_Ext_RMS_Average(float _Data[], uint16_t _Data_Count);
 	void Array_Statistic_Clear(void);
 
+	float Array_Average(float _Data[], int _Data_Count, int _AVG_Type);
+
 private:
 
 	// ************************************************************
