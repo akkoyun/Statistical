@@ -12,11 +12,24 @@ Stats							KEYWORD1
 # Methods and Functions (KEYWORD2)
 #######################################
 
-Stream_Statistic				KEYWORD2
-Data_Clear						KEYWORD2
-Array_Statistic					KEYWORD2
-LinearRegression				KEYWORD2
-		
+Array_Sum                       KEYWORD2
+Array_Max                       KEYWORD2
+Array_Min                       KEYWORD2
+Array_Sq_Sum                    KEYWORD2
+Array_Aritmetic_Average         KEYWORD2
+Array_Geometric_Average         KEYWORD2
+Array_RMS_Average               KEYWORD2
+Array_Ext_RMS_Average           KEYWORD2
+Array_Bubble_Sort               KEYWORD2
+Array_Median                    KEYWORD2
+Array_Standart_Deviation        KEYWORD2
+Array_Standart_Deviation_Error  KEYWORD2
+Array_Coefficient_Factor        KEYWORD2
+Array_Average                   KEYWORD2
+Stream_Statistic                KEYWORD2
+Data_Clear                      KEYWORD2
+LinearRegression                KEYWORD2
+
 #######################################
 # Constants (LITERAL1)
 #######################################
