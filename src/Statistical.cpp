@@ -88,174 +88,144 @@ void Statistical::Data_Clear(void) {
 
 }
 
-void Statistical::Array_Statistic(float _Data[], int _Data_Count, int _AVG_Type) {
+// Array Statistics
 
-	// Calculate Array Total
-	Array_Total(_Data, _Data_Count);
+float Statistical::Array_Sum(float _Data[], uint16_t _Data_Count) {
 
-	// Calculate Square Array Total
-	Array_Sq_Total(_Data, _Data_Count);
-
-	// Calculate Array Max
-	Array_Maximum(_Data, _Data_Count);
-
-	// Calculate Array Min
-	Array_Minimum(_Data, _Data_Count);
-
-	// Calculate Array Aritmetic Average
-	Array_Aritmetic_Average(_Data, _Data_Count);
-
-	// Calculate Array Geometric Average
-	Array_Geometric_Average(_Data, _Data_Count);
-
-	// Calculate Array Standart Deviation
-	Array_Standart_Deviation(_Data, _Data_Count);
-
-	// Calculate Array Standart Deviation Error
-	Array_Standart_Deviation_Error(_Data, _Data_Count);
-
-	// Calculate Array Coefficient Factor
-	Array_Coefficient_Factor(_Data, _Data_Count);
-
-	// Calculate Array Bubble Sort
-	Array_Bubble_Sort(_Data, _Data_Count);
-
-	// Calculate Array Median
-	Array_Median(_Data, _Data_Count);
-
-	// Calculate Array RMS Average
-	Array_RMS_Average(_Data, _Data_Count);
-
-	// Calculate Array Extended RMS Average
-	Array_Ext_RMS_Average(_Data, _Data_Count);
-		
-}
-void Statistical::Array_Total(float _Data[], uint16_t _Data_Count) {
-
-	// Calculate Array Max Value
-	for (int i=0; i < _Data_Count; i++) {
-		
-		Array_Sum += float(_Data[i]);
-		
-	}
-
-}
-void Statistical::Array_Sq_Total(float _Data[], uint16_t _Data_Count) {
-
-	// Calculate Array Square Total
-	for (int i=0; i < _Data_Count; i++) {
-		
-		Array_Sq_Sum += sq(float(_Data[i]));
-		
-	}
-
-}
-void Statistical::Array_Maximum(float _Data[], uint16_t _Data_Count) {
-
-	// Set Maximum Variable
-	Array_Max = float(_Data[0]);
-
-	// Calculate Array Max Value
-	for (int i=0; i < _Data_Count; i++) {
-		
-		if (float(_Data[i]) > Array_Max) Array_Max = float(_Data[i]);
-		
-	}
-
-}
-void Statistical::Array_Minimum(float _Data[], uint16_t _Data_Count) {
-
-	// Set Minimum Variable
-	Array_Min = float(_Data[0]);
-
-	// Calculate Array Min Value
-	for (int i=0; i < _Data_Count; i++) {
-		
-		if (float(_Data[i]) < Array_Min) Array_Min = float(_Data[i]);
-		
-	}
-
-}
-void Statistical::Array_Aritmetic_Average(float _Data[], uint16_t _Data_Count) {
+	// Declare Variable
+	float _Sum = 0;
 
 	// Calculate Array Sum
-	Array_Total(_Data, _Data_Count);
+	for (uint16_t i=0; i < _Data_Count; i++) {
 
-	// Calculate Aritmetic Average
-	Array_AAvg = Array_Sum / _Data_Count;
+		_Sum += (float)_Data[i];
+
+	} 
+
+	// End Function
+	return(_Sum)
 
 }
-void Statistical::Array_Geometric_Average(float _Data[], uint16_t _Data_Count) {
+float Statistical::Array_Max(float _Data[], uint16_t _Data_Count) {
 
-	// Set Geometric Average Variable
-	float _GAvg = 0;
+	// Declare Variable
+	float _Max = (float)_Data[0];
+
+	// Calculate Array Max Value
+	for (uint16_t i=0; i < _Data_Count; i++) {
+		
+		if ((float)_Data[i] > _Max) _Max = (float)_Data[i];
+		
+	}
+
+	// End Function
+	return(_Max)
+
+}
+float Statistical::Array_Min(float _Data[], uint16_t _Data_Count) {
+
+	// Declare Variable
+	float _Min = (float)_Data[0];
+
+	// Calculate Array Min Value
+	for (uint16_t i=0; i < _Data_Count; i++) {
+		
+		if ((float)_Data[i] < _Min) _Min = (float)_Data[i];
+		
+	}
+
+	// End Function
+	return(_Min)
+
+}
+float Statistical::Array_Sq_Sum(float _Data[], uint16_t _Data_Count) {
+
+	// Declare Variable
+	float _Sq_Sum = 0;
+
+	// Calculate Array Square Total
+	for (uint16_t i=0; i < _Data_Count; i++) {
+		
+		_Sq_Sum += sq((float)_Data[i]);
+		
+	}
+
+	// End Function
+	return(_Sq_Sum)
+
+}
+float Statistical::Array_Aritmetic_Average(float _Data[], uint16_t _Data_Count) {
+
+	// Declare Variable
+	float _Sum = 0;
+
+	// Calculate Array Sum
+	_Sum = Array_Sum(_Data, _Data_Count);
+
+	// Calculate Aritmetic Average
+	float _Average = _Sum / _Data_Count;
+
+	// End Function
+	return(_Average)
+
+}
+float Statistical::Array_Geometric_Average(float _Data[], uint16_t _Data_Count) {
+
+	// Declare Variable
+	float _GAvg_Sum = 0;
 
 	// Calculate Geometric Average Value
-	for (int i=0; i < _Data_Count; i++) {
+	for (uint16_t i=0; i < _Data_Count; i++) {
 		
-		_GAvg += (log(_Data[i]) - _GAvg) / (i + 1);
+		_GAvg_Sum += (log(_Data[i]) - _GAvg_Sum) / (i + 1);
 		
 	}
 	
 	// Set Geometric Average Variable
-	Array_GAvg = exp(_GAvg);
+	float _GAvg = exp(_GAvg_Sum);
+
+	// End Function
+	return(_GAvg)
 
 }
-void Statistical::Array_Standart_Deviation(float _Data[], uint16_t _Data_Count) {
+float Statistical::Array_RMS_Average(float _Data[], uint16_t _Data_Count) {
 
-	// Calculate Array Sum
-	Array_Total(_Data, _Data_Count);
+	// Calculate Array Sq Total
+	float _Sum = Array_Sq_Sum(_Data, _Data_Count);
 
-	// Calculate Aritmetic Average
-	float _Avg = Array_Sum / _Data_Count;
+	// Calculate RSM Average
+	float _RMS_Avg = (sqrt(Array_Sq_Sum / _Data_Count));
 
-	// Set Standart Deviation Variable
-	float _SDev = 0;
-
-	// Calculate Array Standart Deviation
-	for (int i=0; i < _Data_Count; i++) {
-		
-		_SDev += sq(_Data[i] - _Avg);
-				  		
-	}
-	_SDev = sqrt(_SDev / (_Data_Count-1));
-
-	// Calculate Aritmetic Average
-	Array_AAvg = _Avg;
-
-	// Set Result
-	Array_SDev = _SDev;
+	// End Function
+	return(_RMS_Avg)
 
 }
-void Statistical::Array_Standart_Deviation_Error(float _Data[], uint16_t _Data_Count) {
+float Statistical::Array_Ext_RMS_Average(float _Data[], uint16_t _Data_Count) {
 
-	// Calculate Standart Deviation
-	Array_Standart_Deviation(_Data, _Data_Count);
+	// Calculate Array Sq Total
+	float _Sum = Array_Sq_Sum(_Data, _Data_Count);
 
-	// Calculate Standart Deviation Error
-	Array_SDev_Err = (Array_SDev / sqrt(float(_Data_Count)));
+	// Calculate Array Minimum
+	float _Min = Array_Min(_Data, _Data_Count);
 
-}
-void Statistical::Array_Coefficient_Factor(float _Data[], uint16_t _Data_Count) {
+	// Calculate Array Minimum
+	float _Max = Array_Max(_Data, _Data_Count);
 
-	// Calculate Array Sum
-	Array_Total(_Data, _Data_Count);
+	// Calculate Extended Sum
+	_Sum -= sq(_Min);
+	_Sum -= sq(_Max);
 
-	// Calculate Aritmetic Average
-	float _Avg = Array_Sum / _Data_Count;
+	// Calculate RSM Average
+	float _Ext_RMS_Avg = (sqrt(_Sum / _Data_Count));
 
-	// Calculate Standart Deviation
-	Array_Standart_Deviation(_Data, _Data_Count);
-
-	// Calculate Coefficient Factor
-	Array_Coef = (100 * Array_SDev / _Avg);
+	// End Function
+	return(_Ext_RMS_Avg)
 
 }
 void Statistical::Array_Bubble_Sort(float _Data[], uint16_t _Data_Count) {
 
 	// Declare Buffer Variables
 	uint16_t _New_n;
-	uint16_t _n = _Data_Count;
 	float _Temp = 0;
 
 	// Sort Array
@@ -279,7 +249,7 @@ void Statistical::Array_Bubble_Sort(float _Data[], uint16_t _Data_Count) {
 
 		}
 
-	} while (_n > 1);
+	} while (_Data_Count > 1);
 
 }
 void Statistical::Array_Median(float _Data[], uint16_t _Data_Count) {
@@ -287,73 +257,97 @@ void Statistical::Array_Median(float _Data[], uint16_t _Data_Count) {
 	// Sort Array
 	Array_Bubble_Sort(_Data, _Data_Count);
 
+	// Declare Variable
+	float _Median = 0;
+
 	// Calculate Median
 	if (_Data_Count % 2 == 0) {
 		
-		Array_Med = _Data[_Data_Count / 2];
+		_Median = _Data[_Data_Count / 2];
 
 	} else {
 
-		Array_Med = ((_Data[_Data_Count / 2] - 1) + _Data[_Data_Count / 2]) / 2;
+		_Median = ((_Data[_Data_Count / 2] - 1) + _Data[_Data_Count / 2]) / 2;
 
 	}
 
-}
-void Statistical::Array_RMS_Average(float _Data[], uint16_t _Data_Count) {
-
-	// Calculate Array Sq Total
-	Array_Sq_Total(_Data, _Data_Count);
-
-	// Calculate RSM Average
-	Array_RMS_Avg = (sqrt(Array_Sq_Sum / _Data_Count));
+	// End Function
+	return(_Median)
 
 }
-void Statistical::Array_Ext_RMS_Average(float _Data[], uint16_t _Data_Count) {
+float Statistical::Array_Standart_Deviation(float _Data[], uint16_t _Data_Count) {
 
-	// Calculate Array Sq Total
-	Array_Sq_Total(_Data, _Data_Count);
+	// Calculate Aritmetic Average
+	float _Avg = Array_Aritmetic_Average(_Data, _Data_Count);
 
-	// Calculate Array Minimum
-	Array_Minimum(_Data, _Data_Count);
+	// Set Standart Deviation Variable
+	float _SDev = 0;
 
-	// Calculate Array Minimum
-	Array_Maximum(_Data, _Data_Count);
+	// Calculate Array Standart Deviation
+	for (int i=0; i < _Data_Count; i++) _SDev += sq(_Data[i] - _Avg);
+	_SDev = sqrt(_SDev / (_Data_Count - 1));
 
-	// Calculate Extended Sum
-	Array_Sq_Sum -= sq(Array_Min);
-	Array_Sq_Sum -= sq(Array_Max);
-
-	// Calculate RSM Average
-	Array_Ext_RMS_Avg = (sqrt(Array_Sq_Sum / _Data_Count));
+	// End Function
+	return(_SDev);
 
 }
-void Statistical::Array_Statistic_Clear(void) {
+float Statistical::Array_Standart_Deviation_Error(float _Data[], uint16_t _Data_Count) {
 
-	// Clear Global Variables
-	Array_Sum = 0;
-	Array_Sq_Sum = 0;
-	Array_Min = 0;
-	Array_Max = 0;
-	Array_AAvg = 0;
-	Array_GAvg = 0;
-	Array_RMS_Avg = 0;
-	Array_Ext_RMS_Avg = 0;
-	Array_Med = 0;
-	Array_SDev = 0;
-	Array_SDev_Err = 0;
-	Array_Coef = 0;
-		
+	// Calculate Standart Deviation
+	float _SDev = Array_Standart_Deviation(_Data, _Data_Count);
+
+	// Calculate Standart Deviation Error
+	float _SDev_Err = (_SDev / sqrt((float)_Data_Count));
+
+	// End Function
+	return(_SDev_Err);
+
 }
+float Statistical::Array_Coefficient_Factor(float _Data[], uint16_t _Data_Count) {
 
+	// Calculate Aritmetic Average
+	float _Avg = Array_Aritmetic_Average(_Data, _Data_Count);
+
+	// Calculate Standart Deviation
+	float _SDev = Array_Standart_Deviation(_Data, _Data_Count);
+
+	// Calculate Coefficient Factor
+	float _Coef = (100 * _SDev / _Avg);
+
+	// End Function
+	return(_Coef);
+
+}
 float Statistical::Array_Average(float _Data[], int _Data_Count, int _AVG_Type) {
 
-	if (_AVG_Type == 1) {Array_Aritmetic_Average(_Data, _Data_Count); return(Array_AAvg);}
-	if (_AVG_Type == 2) {Array_Geometric_Average(_Data, _Data_Count); return(Array_GAvg);}
-	if (_AVG_Type == 3) {Array_Median(_Data, _Data_Count); return(Array_Med);}
-	if (_AVG_Type == 4) {Array_RMS_Average(_Data, _Data_Count); return(Array_RMS_Avg);}
-	if (_AVG_Type == 5) {Array_Ext_RMS_Average(_Data, _Data_Count); return(Array_Ext_RMS_Avg);}
-			
-}
+	// Select Average Type
+	switch (_AVG_Type) {
+		
+		case 1:
+			return(Array_Aritmetic_Average(_Data, _Data_Count));
+    		break;
+  
+  		case 2:
+    		return(Array_Geometric_Average(_Data, _Data_Count));
+    		break;
 
+  		case 3:
+    		return(Array_Median(_Data, _Data_Count));
+    		break;
+
+  		case 4:
+    		return(Array_RMS_Average(_Data, _Data_Count));
+    		break;
+
+  		case 5:
+    		return(Array_Ext_RMS_Average(_Data, _Data_Count));
+    		break;
+
+  		default:
+    		return(0);
+    		break;
+	}
+
+}
 
 Statistical Stats;
