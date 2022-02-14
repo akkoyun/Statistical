@@ -13,16 +13,11 @@ void loop() {
 	// Set Data
 	Serial.println("Learning Data...");
 	float Data_Array[] = {220.14, 221.36, 218.21, 217.6, 215.7, 225.8, 220.14 };
-	int Data_Size = 7;
+	uint8_t Data_Size = 7;
 
 	// Print Array
 	Serial.print("Data Array : ");
-	for (uint8_t i = 0; i < sizeof(Data_Array); i++) {
-        Serial.print("[");
-        Serial.print(Data_Array[i]);
-        Serial.print("] ");
-	}
-	Serial.println("");
+	for (uint8_t i = 0; i < Data_Size; i++) {Serial.print("["); Serial.print(Data_Array[i]); Serial.print("] ");} Serial.println("");
 
 	// Print Stats
 	Serial.print("Array Sum                      : "); Serial.println(Stats.Array_Sum(Data_Array, Data_Size));
@@ -39,12 +34,7 @@ void loop() {
 	Serial.print("Array Coefficient Factor       : "); Serial.println(Stats.Array_Coefficient_Factor(Data_Array, Data_Size));
 
 	Serial.print("Sorted Data Array              : ");
-	for (uint8_t i = 0; i < sizeof(Data_Array); i++) {
-        Serial.print("[");
-        Serial.print(Data_Array[i]);
-        Serial.print("] ");
-	}
-	Serial.println("");
+	for (uint8_t i = 0; i < Data_Size; i++) {Serial.print("["); Serial.print(Data_Array[i]); Serial.print("] ");} Serial.println("");
 
 	Serial.println("--------------------------------------------------");
 
