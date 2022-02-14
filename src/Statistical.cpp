@@ -1,11 +1,9 @@
 /* *******************************************************************************
- *  Copyright (C) 2014-2021 Mehmet Gunce Akkoyun Can not be copied and/or
+ *  Copyright (C) 2014-2022 Mehmet Gunce Akkoyun Can not be copied and/or
  *	distributed without the express permission of Mehmet Gunce Akkoyun.
  *
- *	Library				: Data Stream Statistical Library
+ *	Library				: Data Statistical Library
  *	Code Developer		: Mehmet Gunce Akkoyun (akkoyun@me.com)
- *	Revision			: 01.01.02
- *
  *********************************************************************************/
 
 #include "Statistical.h"
@@ -103,7 +101,7 @@ float Statistical::Array_Sum(float _Data[], uint16_t _Data_Count) {
 	} 
 
 	// End Function
-	return(_Sum)
+	return(_Sum);
 
 }
 float Statistical::Array_Max(float _Data[], uint16_t _Data_Count) {
@@ -119,7 +117,7 @@ float Statistical::Array_Max(float _Data[], uint16_t _Data_Count) {
 	}
 
 	// End Function
-	return(_Max)
+	return(_Max);
 
 }
 float Statistical::Array_Min(float _Data[], uint16_t _Data_Count) {
@@ -135,7 +133,7 @@ float Statistical::Array_Min(float _Data[], uint16_t _Data_Count) {
 	}
 
 	// End Function
-	return(_Min)
+	return(_Min);
 
 }
 float Statistical::Array_Sq_Sum(float _Data[], uint16_t _Data_Count) {
@@ -151,7 +149,7 @@ float Statistical::Array_Sq_Sum(float _Data[], uint16_t _Data_Count) {
 	}
 
 	// End Function
-	return(_Sq_Sum)
+	return(_Sq_Sum);
 
 }
 float Statistical::Array_Aritmetic_Average(float _Data[], uint16_t _Data_Count) {
@@ -166,7 +164,7 @@ float Statistical::Array_Aritmetic_Average(float _Data[], uint16_t _Data_Count) 
 	float _Average = _Sum / _Data_Count;
 
 	// End Function
-	return(_Average)
+	return(_Average);
 
 }
 float Statistical::Array_Geometric_Average(float _Data[], uint16_t _Data_Count) {
@@ -185,7 +183,7 @@ float Statistical::Array_Geometric_Average(float _Data[], uint16_t _Data_Count) 
 	float _GAvg = exp(_GAvg_Sum);
 
 	// End Function
-	return(_GAvg)
+	return(_GAvg);
 
 }
 float Statistical::Array_RMS_Average(float _Data[], uint16_t _Data_Count) {
@@ -194,10 +192,10 @@ float Statistical::Array_RMS_Average(float _Data[], uint16_t _Data_Count) {
 	float _Sum = Array_Sq_Sum(_Data, _Data_Count);
 
 	// Calculate RSM Average
-	float _RMS_Avg = (sqrt(Array_Sq_Sum / _Data_Count));
+	float _RMS_Avg = (sqrt(_Sum / _Data_Count));
 
 	// End Function
-	return(_RMS_Avg)
+	return(_RMS_Avg);
 
 }
 float Statistical::Array_Ext_RMS_Average(float _Data[], uint16_t _Data_Count) {
@@ -219,13 +217,14 @@ float Statistical::Array_Ext_RMS_Average(float _Data[], uint16_t _Data_Count) {
 	float _Ext_RMS_Avg = (sqrt(_Sum / _Data_Count));
 
 	// End Function
-	return(_Ext_RMS_Avg)
+	return(_Ext_RMS_Avg);
 
 }
 void Statistical::Array_Bubble_Sort(float _Data[], uint16_t _Data_Count) {
 
 	// Declare Buffer Variables
 	uint16_t _New_n;
+	uint16_t _n = _Data_Count;
 	float _Temp = 0;
 
 	// Sort Array
@@ -249,10 +248,10 @@ void Statistical::Array_Bubble_Sort(float _Data[], uint16_t _Data_Count) {
 
 		}
 
-	} while (_Data_Count > 1);
+	} while (_New_n > 1);
 
 }
-void Statistical::Array_Median(float _Data[], uint16_t _Data_Count) {
+float Statistical::Array_Median(float _Data[], uint16_t _Data_Count) {
 
 	// Sort Array
 	Array_Bubble_Sort(_Data, _Data_Count);
@@ -272,7 +271,7 @@ void Statistical::Array_Median(float _Data[], uint16_t _Data_Count) {
 	}
 
 	// End Function
-	return(_Median)
+	return(_Median);
 
 }
 float Statistical::Array_Standart_Deviation(float _Data[], uint16_t _Data_Count) {
