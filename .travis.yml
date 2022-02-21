@@ -1,5 +1,6 @@
 language: c
-sudo: false
+os: linux
+dist: xenial
 cache:
   directories:
     - ~/arduino_ide
@@ -7,20 +8,19 @@ cache:
 git:
   depth: false
   quiet: true
-addons:
-  apt:
-    sources:
-      - llvm-toolchain-trusty-5.0
-      - key_url: 'http://apt.llvm.org/llvm-snapshot.gpg.key'
-    packages:
-      - python3-pip
-      - python3-wheel
 env:
   global:
-     - PRETTYNAME="Statistic Library for Sensors"
-
+     # You can uncomment this to explicitly choose an (old) version of the Arduino IDE
+     #- ARDUINO_IDE_VERSION="1.8.10"
 before_install:
-   - source <(curl -SLs https://raw.githubusercontent.com/akkoyun/Statistical/01.01.01/install.sh)
-
+  - source <(curl -SLs https://raw.githubusercontent.com/akkoyun/Statistical/Main/install.sh)
+install:
+  # Note that every library should be installed in a seperate command
+  # - arduino --install-library "Adafruit SleepyDog Library"
+  # - arduino --install-library "Adafruit FONA Library"
 script:
-   - build_main_platforms
+  - build_main_platforms
+notifications:
+  email:
+    on_success: change
+    on_failure: change
