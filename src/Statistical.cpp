@@ -86,8 +86,11 @@ void Statistical::Data_Clear(void) {
 
 }
 
-// Array Statistics
+// TODO: Stream statistic
 
+// TODO: Stream regression function
+
+// Array Statistics
 float Statistical::Array_Sum(float _Data[], uint16_t _Data_Count) {
 
 	// Declare Variable
