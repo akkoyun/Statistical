@@ -8,6 +8,7 @@
 
 #include "Statistical.h"
 
+// TODO: Stream regression function
 void Statistical::Stream_Statistic(float _Data) {
 
 	// Set Data Count (+1)
@@ -26,46 +27,11 @@ void Statistical::Stream_Statistic(float _Data) {
 	Stream_Average = Stream_Average + ((_Data - Stream_Average) / Data_Count);
 
 }
-void Statistical::LinearRegression(float _X, float _Y){
-
-	// Increase Data Count Variable
-	Data_Count++;
-	
-	// Calculate Mean X
-	Linear_Regression_MeanX = Linear_Regression_MeanX + ((_X - Linear_Regression_MeanX) / Data_Count);
-
-	// Calculate Mean X Square
-	Linear_Regression_MeanX2 = Linear_Regression_MeanX2 + (((_X * _X) - Linear_Regression_MeanX2) / Data_Count);
-	
-	// Calculate Variance X
-	Linear_Regression_VarianceX = Linear_Regression_MeanX2 - (Linear_Regression_MeanX * Linear_Regression_MeanX);
-
-	// Calculate Mean Y
-	Linear_Regression_MeanY = Linear_Regression_MeanY + ((_Y - Linear_Regression_MeanY) / Data_Count);
-
-	// Calculate Mean Y Square
-	Linear_Regression_MeanY2 = Linear_Regression_MeanY2 + (((_Y * _Y) - Linear_Regression_MeanY2) / Data_Count);
-	
-	// Calculate Variance Y
-	Linear_Regression_VarianceY = Linear_Regression_MeanY2 - (Linear_Regression_MeanY * Linear_Regression_MeanY);
-
-	// Calculate Mean XY
-	Linear_Regression_MeanXY = Linear_Regression_MeanXY + (((_X * _Y) - Linear_Regression_MeanXY) / Data_Count);
-
-	// Calculate Covariance XY
-	Linear_Regression_CovarianceXY = Linear_Regression_MeanXY - (Linear_Regression_MeanX * Linear_Regression_MeanY);
-
-	// Calculate a
-	Linear_Regression_a = Linear_Regression_CovarianceXY / Linear_Regression_VarianceX;
-	
-	// Calculate b
-	Linear_Regression_b = Linear_Regression_MeanY - (Linear_Regression_a * Linear_Regression_MeanX);
-	
-}
 void Statistical::Data_Clear(void) {
 
 	// Clear Data Count
 	Data_Count = 0;
+	Linear_Regression_Data_Count = 0;
 
 	// Celar Stream Variables
 	Stream_Average = 0;
@@ -81,14 +47,78 @@ void Statistical::Data_Clear(void) {
 	Linear_Regression_MeanXY = 0;
 	Linear_Regression_VarianceY = 0;
 	Linear_Regression_CovarianceXY = 0;
-	Linear_Regression_a = 0;
-	Linear_Regression_b	= 0;
+	Linear_Regression_Slope = 0;
+	Linear_Regression_Offset	= 0;
 
 }
 
-// TODO: Stream statistic
+// Linear Regression Statistics
+void Statistical::Linear_Regression_Calculate(float _Data[][2]) {
 
-// TODO: Stream regression function
+	// Calculate array regression
+	for (uint16_t i = 0; i < Linear_Regression_Presicion; i++) {
+
+		// Print Array
+		Serial.print(_Data[i][0]); Serial.print("-"); Serial.println(_Data[i][1]);
+
+		// Push Data
+		Linear_Regression(_Data[i][0], _Data[i][1]);
+
+	}
+
+}
+void Statistical::Linear_Regression(float _X, float _Y){
+
+	// Increase Data Count Variable
+	Linear_Regression_Data_Count++;
+	
+	// Calculate Mean X
+	Linear_Regression_MeanX = Linear_Regression_MeanX + ((_X - Linear_Regression_MeanX) / Linear_Regression_Data_Count);
+
+	// Calculate Mean X Square
+	Linear_Regression_MeanX2 = Linear_Regression_MeanX2 + (((_X * _X) - Linear_Regression_MeanX2) / Linear_Regression_Data_Count);
+	
+	// Calculate Variance X
+	Linear_Regression_VarianceX = Linear_Regression_MeanX2 - (Linear_Regression_MeanX * Linear_Regression_MeanX);
+
+	// Calculate Mean Y
+	Linear_Regression_MeanY = Linear_Regression_MeanY + ((_Y - Linear_Regression_MeanY) / Linear_Regression_Data_Count);
+
+	// Calculate Mean Y Square
+	Linear_Regression_MeanY2 = Linear_Regression_MeanY2 + (((_Y * _Y) - Linear_Regression_MeanY2) / Linear_Regression_Data_Count);
+	
+	// Calculate Variance Y
+	Linear_Regression_VarianceY = Linear_Regression_MeanY2 - (Linear_Regression_MeanY * Linear_Regression_MeanY);
+
+	// Calculate Mean XY
+	Linear_Regression_MeanXY = Linear_Regression_MeanXY + (((_X * _Y) - Linear_Regression_MeanXY) / Linear_Regression_Data_Count);
+
+	// Calculate Covariance XY
+	Linear_Regression_CovarianceXY = Linear_Regression_MeanXY - (Linear_Regression_MeanX * Linear_Regression_MeanY);
+
+	// Calculate a
+	Linear_Regression_Slope = Linear_Regression_CovarianceXY / Linear_Regression_VarianceX;
+	
+	// Calculate b
+	Linear_Regression_Offset = Linear_Regression_MeanY - (Linear_Regression_Slope * Linear_Regression_MeanX);
+	
+}
+void Statistical::Linear_Regression_Data_Clear(void) {
+
+	// Clear Regression Variables
+	Linear_Regression_Data_Count = 0;
+	Linear_Regression_MeanX = 0;
+	Linear_Regression_MeanX2 = 0;
+	Linear_Regression_VarianceX = 0;
+	Linear_Regression_MeanY = 0;
+	Linear_Regression_MeanY2 = 0;
+	Linear_Regression_MeanXY = 0;
+	Linear_Regression_VarianceY = 0;
+	Linear_Regression_CovarianceXY = 0;
+	Linear_Regression_Slope = 0;
+	Linear_Regression_Offset	= 0;
+
+}
 
 // Array Statistics
 float Statistical::Array_Sum(float _Data[], uint16_t _Data_Count) {
@@ -349,6 +379,22 @@ float Statistical::Array_Average(float _Data[], int _Data_Count, int _AVG_Type) 
     		return(0);
     		break;
 	}
+
+}
+void Statistical::Array_FILO(float _Array[][2], uint16_t _Data_Count, float _X, float _Y) {
+	
+
+	// Redesign Array
+	for (uint16_t i = 0; i < _Data_Count-1; i++) {
+	
+		_Array[i][0] = _Array[i+1][0];
+		_Array[i][1] = _Array[i+1][1];
+	
+	}
+	
+	// Add New Data
+	_Array[_Data_Count-1][0] = _X;
+	_Array[_Data_Count-1][1] = _Y;
 
 }
 
