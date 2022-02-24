@@ -2,7 +2,7 @@
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/akkoyun/Statistical) ![arduino-library-badge](https://www.ardu-badge.com/badge/Statistical.svg?) ![Visits Badge](https://badges.pufler.dev/visits/akkoyun/Statistical) ![GitHub stars](https://img.shields.io/github/stars/akkoyun/Statistical?style=flat&logo=github) ![Updated Badge](https://badges.pufler.dev/updated/akkoyun/Statistical) ![PlatformIO Registry](https://badges.registry.platformio.org/packages/akkoyun/library/Statistical.svg)
 
-	Library - 01.03.03
+	Library - 01.04.00
 
 ---
 
@@ -31,6 +31,7 @@ Library calculate listed statistical parameters for fixed size arrays.
 	* Standart Deviation
 	* Standart Deviation Error
 	* Coefficient Factor
+	* Array FILO
 
 **Stream Statistics**
 
@@ -48,9 +49,13 @@ Library calculate listed statistical parameters for fixed size arrays.
 	* Slope
 	* Offset
 
-**Working on**
+**Stream Linear Regression**
 
-Still working on data stream regression functions.
+Library calculate listed statistical parameters for data stream. User set the regression presicion for calculating last n data regression.
+
+	* Presicion
+	* Slope
+	* Offset
 
 ---
 

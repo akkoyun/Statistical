@@ -31,23 +31,30 @@ public:
 	float 			Stream_Maximum 						= 0;
 	
 	// Linear Regression Definations
-	float 			Linear_Regression_MeanX				= 0;
-	float 			Linear_Regression_MeanX2			= 0;
-	float 			Linear_Regression_VarianceX			= 0;
-	float 			Linear_Regression_MeanY				= 0;
-	float 			Linear_Regression_MeanY2			= 0;
-	float 			Linear_Regression_MeanXY			= 0;
-	float 			Linear_Regression_VarianceY			= 0;
-	float 			Linear_Regression_CovarianceXY		= 0;
-	float 			Linear_Regression_a					= 0;
-	float 			Linear_Regression_b					= 0;
+	uint16_t		Linear_Regression_Data_Count		= 0;
+	uint16_t		Linear_Regression_Presicion			= 0;
+	float 			Linear_Regression_Slope				= 0;
+	float 			Linear_Regression_Offset			= 0;
 	
 	// ************************************************************
 	// Public Functions
 	// ************************************************************
 	void Stream_Statistic(float _Data);
-	void LinearRegression(float _X, float _Y);
 	void Data_Clear(void);
+
+	/**
+	 * @brief Calculate Linear Regression
+	 * @version 01.00.00
+	 * @param _X Data array
+	 * @param _Y Data size
+	 */
+	void Linear_Regression(float _X, float _Y);
+	/**
+	 * @brief Linear Regression Data Clear
+	 * @version 01.00.00
+	 */
+	void Linear_Regression_Data_Clear(void);
+	void Linear_Regression_Calculate(float _Data[][2]);
 
 	/**
 	 * @brief Calculate the array sum.
@@ -160,12 +167,30 @@ public:
 	 * @return float - Average value of array.
 	 */
 	float Array_Average(float _Data[], int _Data_Count, int _AVG_Type);
+	/**
+	 * @brief Set Array FILO
+	 * @version 01.00.00
+	 * @param _Array Data array
+	 * @param _Data_Count Array size
+	 * @param _Data New Array Data
+	 */	
+	void Array_FILO(float _Array[][2], uint16_t _Data_Count, float _X, float _Y);
 
 private:
 
 	// ************************************************************
 	// Private Variables
 	// ************************************************************
+
+	// Linear Regression Variables
+	float 			Linear_Regression_MeanX				= 0;
+	float 			Linear_Regression_MeanX2			= 0;
+	float 			Linear_Regression_VarianceX			= 0;
+	float 			Linear_Regression_MeanY				= 0;
+	float 			Linear_Regression_MeanY2			= 0;
+	float 			Linear_Regression_MeanXY			= 0;
+	float 			Linear_Regression_VarianceY			= 0;
+	float 			Linear_Regression_CovarianceXY		= 0;
 
 	
 	// ************************************************************
