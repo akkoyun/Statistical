@@ -2,7 +2,7 @@
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/akkoyun/Statistical) ![arduino-library-badge](https://www.ardu-badge.com/badge/Statistical.svg?) ![Visits Badge](https://badges.pufler.dev/visits/akkoyun/Statistical) ![GitHub stars](https://img.shields.io/github/stars/akkoyun/Statistical?style=flat&logo=github) ![Updated Badge](https://badges.pufler.dev/updated/akkoyun/Statistical) ![PlatformIO Registry](https://badges.registry.platformio.org/packages/akkoyun/library/Statistical.svg)
 
-	Build - 01.04.02
+	Build - 01.04.03
 
 ---
 
@@ -14,8 +14,11 @@ We developed this library to help quickly accomplish median and mode filtering w
 
 A bubble sort algorithm is also contained in this library which was necessary to calculate median and mode.
 
-**Array Statistics**
 
+<details>
+  <summary>Array Statistics</summary>
+
+</br>
 Library calculate listed statistical parameters for fixed size arrays.
 
 	* Sum
@@ -33,8 +36,12 @@ Library calculate listed statistical parameters for fixed size arrays.
 	* Coefficient Factor
 	* Array FILO
 
-**Stream Statistics**
+</details>
 
+<details>
+  <summary>Stream Statistics</summary>
+
+</br>
 Library calculate listed statistical parameters for data streams.
 
 	* Data Count
@@ -42,26 +49,40 @@ Library calculate listed statistical parameters for data streams.
 	* Minimum
 	* Maximum
 
-**Array Linear Regression**
+</details>
 
+<details>
+  <summary>Array Linear Regression</summary>
+
+</br>
 Library calculate listed statistical parameters for fixed size arrays.
 
 	* Slope
 	* Offset
 
-**Stream Linear Regression**
+</details>
 
+<details>
+  <summary>Stream Linear Regression</summary>
+
+</br>
 Library calculate listed statistical parameters for data stream. User set the regression presicion for calculating last n data regression.
 
 	* Presicion
 	* Slope
 	* Offset
 
-**Machine Learning Algorithm**
+</details>
 
+<details>
+  <summary>Machine Learning Algorithm</summary>
+
+</br>
 This library will calculate slope of data according last n value. With these slope data system can learn sensor anomaly and make desicion.
 
 <img src="/Documents/Pressure_Regression.gif" width="800">
+
+</details>
 
 ---
 
