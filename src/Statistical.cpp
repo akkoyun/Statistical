@@ -59,7 +59,7 @@ void Statistical::Linear_Regression_Calculate(float _Data[][2]) {
 	for (uint16_t i = 0; i < Linear_Regression_Presicion; i++) {
 
 		// Print Array
-		Serial.print(_Data[i][0]); Serial.print("-"); Serial.println(_Data[i][1]);
+		//Serial.print(_Data[i][0]); Serial.print("-"); Serial.println(_Data[i][1]);
 
 		// Push Data
 		Linear_Regression(_Data[i][0], _Data[i][1]);
