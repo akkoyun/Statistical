@@ -66,6 +66,10 @@ void Statistical::Linear_Regression_Calculate(float _Data[][2]) {
 
 	}
 
+	// Control for valid data
+	if (isinf(Linear_Regression_Slope)) Linear_Regression_Slope = 0;
+	if (isnan(Linear_Regression_Slope)) Linear_Regression_Slope = 0;
+
 }
 void Statistical::Linear_Regression(float _X, float _Y){
 
