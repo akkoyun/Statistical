@@ -22,13 +22,13 @@ public:
 	// Public Variables
 	// ************************************************************
 
-	// Data Count Definations
-	uint16_t		Data_Count							= 0;
-
-	// Stream Data Definations
-	float 			Stream_Average 						= 0;
-	float 			Stream_Minimum 						= 0;
+	// Stream Calculation Variables
+	uint16_t		Stream_Data_Count_Max				= 0;
 	float 			Stream_Maximum 						= 0;
+	uint16_t		Stream_Data_Count_Min				= 0;
+	float 			Stream_Minimum 						= 0;
+	uint16_t		Stream_Data_Count_Avg				= 0;
+	float 			Stream_Average 						= 0;
 	
 	// Linear Regression Definations
 	uint16_t		Linear_Regression_Data_Count		= 0;
@@ -39,8 +39,58 @@ public:
 	// ************************************************************
 	// Public Functions
 	// ************************************************************
+	/**
+	 * @brief Calculate Stream Maximum Value
+	 * @version 01.00.00
+	 * @param _Data Data Variable
+	 */
+	float Stream_Max(float _Data);
+	/**
+	 * @brief Calculate Stream Minimum Value
+	 * @version 01.00.00
+	 * @param _Data Data Variable
+	 */
+	float Stream_Min(float _Data);
+	/**
+	 * @brief Calculate Stream Average Value
+	 * @version 01.00.00
+	 * @param _Data Data Variable
+	 */
+	float Stream_Aritmetic_Average(float _Data);
+	/**
+	 * @brief Clear Stream Maximum Value
+	 * @version 01.00.00
+	 */
+	void Stream_Clear_Max(void);
+	/**
+	 * @brief Clear Stream Minimum Value
+	 * @version 01.00.00
+	 */
+	void Stream_Clear_Min(void);
+	/**
+	 * @brief Clear Stream Average Value
+	 * @version 01.00.00
+	 */
+	void Stream_Clear_Aritmetic_Average(void);
+	/**
+	 * @brief Calculate Min, Max, Avg Value
+	 * @version 01.00.00
+	 */
 	void Stream_Statistic(float _Data);
-	void Data_Clear(void);
+	/**
+	 * @brief Clear Stream Values
+	 * @version 01.00.00
+	 */
+	void Stream_Clear(void);
+
+
+
+
+
+
+
+
+
 
 	/**
 	 * @brief Calculate Linear Regression
@@ -54,6 +104,10 @@ public:
 	 * @version 01.00.00
 	 */
 	void Linear_Regression_Data_Clear(void);
+	/**
+	 * @brief Linear Regression Calculate
+	 * @version 01.00.00
+	 */
 	void Linear_Regression_Calculate(float _Data[][2]);
 
 	/**
@@ -191,7 +245,6 @@ private:
 	float 			Linear_Regression_MeanXY			= 0;
 	float 			Linear_Regression_VarianceY			= 0;
 	float 			Linear_Regression_CovarianceXY		= 0;
-
 	
 	// ************************************************************
 	// Private Functions

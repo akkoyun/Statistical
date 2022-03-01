@@ -9,48 +9,93 @@
 #include "Statistical.h"
 
 // TODO: Stream regression function
-void Statistical::Stream_Statistic(float _Data) {
+float Statistical::Stream_Max(float _Data) {
 
-	// Set Data Count (+1)
-	Data_Count++;
+	// Increase Data Count Variable
+	Stream_Data_Count_Max++;
 
 	// Calculate Max Value
 	if (Stream_Maximum == 0) Stream_Maximum = _Data;
 	if (_Data > Stream_Maximum) Stream_Maximum = _Data;
 
+	// End Function
+	return(Stream_Maximum);
+
+}
+void Statistical::Stream_Clear_Max(void) {
+
+	// Celar Stream Variables
+	Stream_Data_Count_Max = 0;
+	Stream_Maximum = 0;
+
+}
+float Statistical::Stream_Min(float _Data) {
+
+	// Increase Data Count Variable
+	Stream_Data_Count_Min++;
+
 	// Calculate Min Value
 	if (Stream_Minimum == 0) Stream_Minimum = _Data;
 	if (_Data < Stream_Minimum) Stream_Minimum = _Data;
 
-	// Calculate Avg Value
-	if (Stream_Average == 0) Stream_Average = _Data;
-	Stream_Average = Stream_Average + ((_Data - Stream_Average) / Data_Count);
+	// End Function
+	return(Stream_Minimum);
 
 }
-void Statistical::Data_Clear(void) {
-
-	// Clear Data Count
-	Data_Count = 0;
-	Linear_Regression_Data_Count = 0;
+void Statistical::Stream_Clear_Min(void) {
 
 	// Celar Stream Variables
-	Stream_Average = 0;
-	Stream_Maximum = 0;
+	Stream_Data_Count_Min = 0;
 	Stream_Minimum = 0;
 
-	// Clear Regression Variables
-	Linear_Regression_MeanX = 0;
-	Linear_Regression_MeanX2 = 0;
-	Linear_Regression_VarianceX = 0;
-	Linear_Regression_MeanY = 0;
-	Linear_Regression_MeanY2 = 0;
-	Linear_Regression_MeanXY = 0;
-	Linear_Regression_VarianceY = 0;
-	Linear_Regression_CovarianceXY = 0;
-	Linear_Regression_Slope = 0;
-	Linear_Regression_Offset	= 0;
+}
+float Statistical::Stream_Aritmetic_Average(float _Data) {
+
+	// Increase Data Count Variable
+	Stream_Data_Count_Avg++;
+
+	// Calculate Avg Value
+	if (Stream_Average == 0) Stream_Average = _Data;
+	Stream_Average = Stream_Average + ((_Data - Stream_Average) / Stream_Data_Count_Avg);
+
+	// End Function
+	return(Stream_Average);
 
 }
+void Statistical::Stream_Clear_Aritmetic_Average(void) {
+
+	// Celar Stream Variables
+	Stream_Data_Count_Avg = 0;
+	Stream_Average = 0;
+
+}
+void Statistical::Stream_Statistic(float _Data) {
+
+	// Calculate Maximum
+	Stream_Max(_Data);
+
+	// Calculate Minimum
+	Stream_Min(_Data);
+
+	// Calculate Average
+	Stream_Aritmetic_Average(_Data);
+
+}
+void Statistical::Stream_Clear(void) {
+
+	// Celar Stream Variables
+	Stream_Data_Count_Max = 0;
+	Stream_Maximum = 0;
+	Stream_Data_Count_Min = 0;
+	Stream_Minimum = 0;
+	Stream_Data_Count_Avg = 0;
+	Stream_Average = 0;
+
+}
+
+
+
+
 
 // Linear Regression Statistics
 void Statistical::Linear_Regression_Calculate(float _Data[][2]) {
