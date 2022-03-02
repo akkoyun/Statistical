@@ -1,8 +1,8 @@
 # Statistical Library <sup>V1.4</sup>
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/akkoyun/Statistical) ![arduino-library-badge](https://www.ardu-badge.com/badge/Statistical.svg?) ![Visits Badge](https://badges.pufler.dev/visits/akkoyun/Statistical) ![GitHub stars](https://img.shields.io/github/stars/akkoyun/Statistical?style=flat&logo=github) ![Updated Badge](https://badges.pufler.dev/updated/akkoyun/Statistical) ![PlatformIO Registry](https://badges.registry.platformio.org/packages/akkoyun/library/Statistical.svg)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/akkoyun/Statistical) ![arduino-library-badge](https://www.ardu-badge.com/badge/Statistical.svg?) ![Visits Badge](https://badges.pufler.dev/visits/akkoyun/Statistical) ![GitHub stars](https://img.shields.io/github/stars/akkoyun/Statistical?style=flat&logo=github) ![Updated Badge](https://badges.pufler.dev/updated/akkoyun/Statistical) ![PlatformIO Registry](https://badges.registry.platformio.org/packages/akkoyun/library/Statistical.svg) [![Check Arduino](https://github.com/akkoyun/Statistical/actions/workflows/check-arduino.yml/badge.svg)](https://github.com/akkoyun/Statistical/actions/workflows/check-arduino.yml)
 
-	Build - 01.04.04
+	Build - 01.04.06
 
 ---
 
@@ -25,14 +25,14 @@ Library calculate listed statistical parameters for fixed size arrays.
 	* Maximum
 	* Minimum
 	* Square Sum
-	* Aritmetic Average
+	* Arithmetic Average
 	* Geometric Average
 	* RMS Average
 	* 1 Sigma RMS Average
 	* Bubble Sort
 	* Median
-	* Standart Deviation
-	* Standart Deviation Error
+	* Standard Deviation
+	* Standard Deviation Error
 	* Coefficient Factor
 	* Array FILO
 
@@ -45,7 +45,7 @@ Library calculate listed statistical parameters for fixed size arrays.
 Library calculate listed statistical parameters for data streams.
 
 	* Data Count
-	* Aritmetic Average
+	* Arithmetic Average
 	* Minimum
 	* Maximum
 
@@ -66,7 +66,7 @@ Library calculate listed statistical parameters for fixed size arrays.
   <summary>Stream Linear Regression</summary>
 
 </br>
-Library calculate listed statistical parameters for data stream. User set the regression presicion for calculating last n data regression.
+Library calculate listed statistical parameters for data stream. User set the regression precision for calculating last n data regression.
 
 	* Presicion
 	* Slope

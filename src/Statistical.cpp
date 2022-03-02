@@ -8,7 +8,7 @@
 
 #include "Statistical.h"
 
-// TODO: Stream regression function
+// Stream Statistics
 float Statistical::Stream_Max(float _Data) {
 
 	// Increase Data Count Variable
@@ -92,10 +92,6 @@ void Statistical::Stream_Clear(void) {
 	Stream_Average = 0;
 
 }
-
-
-
-
 
 // Linear Regression Statistics
 void Statistical::Linear_Regression_Calculate(float _Data[][2]) {
@@ -302,37 +298,6 @@ float Statistical::Array_Ext_RMS_Average(float _Data[], uint16_t _Data_Count) {
 	return(_Ext_RMS_Avg);
 
 }
-void Statistical::Array_Bubble_Sort(float _Data[], uint16_t _Data_Count) {
-
-	// Declare Buffer Variables
-	uint16_t _New_n;
-	uint16_t _n = _Data_Count;
-	float _Temp = 0;
-
-	// Sort Array
-	do {
-
-		_New_n = 1;
-
-		for (int i=1; i < _Data_Count; i++) {
-
-			if(_Data[i - 1]>_Data[i]){
-				
-				_Temp = _Data[i];
-				
-				_Data[i]=_Data[i - 1];
-				
-				_Data[i - 1] = _Temp;
-				
-				_New_n = i;
-
-			} //end if
-
-		}
-
-	} while (_New_n > 1);
-
-}
 float Statistical::Array_Median(float _Data[], uint16_t _Data_Count) {
 
 	// Sort Array
@@ -428,6 +393,39 @@ float Statistical::Array_Average(float _Data[], int _Data_Count, int _AVG_Type) 
     		return(0);
     		break;
 	}
+
+}
+
+// Array Misc Functions
+void Statistical::Array_Bubble_Sort(float _Data[], uint16_t _Data_Count) {
+
+	// Declare Buffer Variables
+	uint16_t _New_n;
+	uint16_t _n = _Data_Count;
+	float _Temp = 0;
+
+	// Sort Array
+	do {
+
+		_New_n = 1;
+
+		for (int i=1; i < _Data_Count; i++) {
+
+			if(_Data[i - 1]>_Data[i]){
+				
+				_Temp = _Data[i];
+				
+				_Data[i]=_Data[i - 1];
+				
+				_Data[i - 1] = _Temp;
+				
+				_New_n = i;
+
+			} //end if
+
+		}
+
+	} while (_New_n > 1);
 
 }
 void Statistical::Array_FILO(float _Array[][2], uint16_t _Data_Count, float _X, float _Y) {
