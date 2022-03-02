@@ -33,7 +33,7 @@ jobs:
 
       matrix:
         board:
-          - fqbn: arduino
+          - fqbn: arduino:avr:mega:cpu=atmega2560
             platforms: |
               - name: arduino:samd
     steps:
