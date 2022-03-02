@@ -15,7 +15,7 @@ export MAIN_PLATFORMS='declare -A main_platforms=( [uno]="arduino:avr:uno" [mega
 sleep 3
 export DISPLAY=:1.0
 
-#This condition is to avoid reruning install when build argument is passed
+#This condition is to avoid rerunning install when build argument is passed
 if [[ $# -eq 0 ]] ; then
 
 	# define colors
@@ -72,7 +72,7 @@ if [[ $# -eq 0 ]] ; then
 	echo -e "${YELLOW}INSTALLING DEPENDENCIES"
 	echo "########################################################################";
 
-	# install dependancy libraries in library.properties
+	# install dependency libraries in library.properties
 	grep "depends=" $HOME/arduino_ide/libraries/Adafruit_Test_Library/library.properties | sed 's/depends=//' | sed -n 1'p' |  tr ',' '\n' | while read word; do arduino --install-library "$word"; done
 
 	# install the zero, esp8266, and adafruit board packages

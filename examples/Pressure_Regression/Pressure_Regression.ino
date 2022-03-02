@@ -33,7 +33,6 @@ void setup() {
         DataSet.Linear_Regression_Data_Clear();
 
     }
-    
 
 }
 
@@ -54,10 +53,6 @@ void loop() {
     // Calculate Anomaly
     float _Pressure_Anomaly = DataSet.Linear_Regression_Slope * 100;
 
-    // Print Anomaly
-    //if (_Pressure_Anomaly > 4) Serial.println("Basinc Artisi");
-    //if (_Pressure_Anomaly < -4) Serial.println("Basinc Azalisi");
-    
 	// Print Calculated Data
     Serial.print("Pressure : "); Serial.print(_Pressure, 4); Serial.println(" Bar");    
     Serial.print("Slope    : "); Serial.print(DataSet.Linear_Regression_Slope * 100, 4); Serial.println(" ");

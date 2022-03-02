@@ -20,14 +20,14 @@ void loop() {
 	DataSet.Stream_Statistic(132.2);
     
     // Print Calculations
-    Serial.print("Stream Data Count : "); Serial.println(DataSet.Data_Count);
+    Serial.print("Stream Data Count : "); Serial.println(DataSet.Stream_Data_Count_Avg);
     Serial.print("Stream Avg Value  : "); Serial.println(DataSet.Stream_Average);
     Serial.print("Stream Min Value  : "); Serial.println(DataSet.Stream_Minimum);
     Serial.print("Stream Max Value  : "); Serial.println(DataSet.Stream_Maximum);
     Serial.println("----------------");
 
 	// Reset
-	DataSet.Data_Clear();
+    DataSet.Stream_Clear();
     
     delay(1000);
     
