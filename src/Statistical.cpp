@@ -97,7 +97,7 @@ void Statistical::Stream_Clear(void) {
 void Statistical::Linear_Regression_Calculate(float _Data[][2]) {
 
 	// Calculate array regression
-	for (uint16_t i = 0; i < Linear_Regression_Presicion; i++) {
+	for (uint16_t i = 0; i < Linear_Regression_Precision; i++) {
 
 		// Print Array
 		//Serial.print(_Data[i][0]); Serial.print("-"); Serial.println(_Data[i][1]);
@@ -330,7 +330,7 @@ float Statistical::Array_Standard_Deviation(float _Data[], uint16_t _Data_Count)
 	float _SDev = 0;
 
 	// Calculate Array Standard Deviation
-	for (int i=0; i < _Data_Count; i++) _SDev += sq(_Data[i] - _Avg);
+	for (uint16_t i=0; i < _Data_Count; i++) _SDev += sq(_Data[i] - _Avg);
 	_SDev = sqrt(_SDev / (_Data_Count - 1));
 
 	// End Function
@@ -401,7 +401,6 @@ void Statistical::Array_Bubble_Sort(float _Data[], uint16_t _Data_Count) {
 
 	// Declare Buffer Variables
 	uint16_t _New_n;
-	uint16_t _n = _Data_Count;
 	float _Temp = 0;
 
 	// Sort Array
@@ -409,7 +408,7 @@ void Statistical::Array_Bubble_Sort(float _Data[], uint16_t _Data_Count) {
 
 		_New_n = 1;
 
-		for (int i=1; i < _Data_Count; i++) {
+		for (uint16_t i=1; i < _Data_Count; i++) {
 
 			if(_Data[i - 1]>_Data[i]){
 				

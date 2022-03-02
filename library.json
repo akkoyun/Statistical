@@ -1,6 +1,6 @@
 {
 	"name": "Statistical",
-	"version": "1.4.9",
+	"version": "1.4.10",
 	"keywords": "Statistical, Max, Min, Average, Regression, Data, Sensor, Slope, Offset",
 	"description": "Function calculates statistical parameters of data stream and array",
 	"authors":
@@ -35,13 +35,6 @@
 			"base": "examples/Regression/",
 			"files": [
 				"Regression.ino"
-			]
-		},
-		{
-			"name": "Pressure Regression Stream",
-			"base": "examples/Pressure_Regression/",
-			"files": [
-				"Pressure_Regression.ino"
 			]
 		},
 		{
