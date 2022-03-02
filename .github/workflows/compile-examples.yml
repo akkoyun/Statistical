@@ -33,7 +33,7 @@ jobs:
 
       matrix:
         board:
-          - fqbn: arduino:samd:mkr1000
+          - fqbn: arduino
             platforms: |
               - name: arduino:samd
     steps:
