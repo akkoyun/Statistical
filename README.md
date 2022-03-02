@@ -2,7 +2,7 @@
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/akkoyun/Statistical) ![arduino-library-badge](https://www.ardu-badge.com/badge/Statistical.svg?) ![Visits Badge](https://badges.pufler.dev/visits/akkoyun/Statistical) ![GitHub stars](https://img.shields.io/github/stars/akkoyun/Statistical?style=flat&logo=github) ![Updated Badge](https://badges.pufler.dev/updated/akkoyun/Statistical) ![PlatformIO Registry](https://badges.registry.platformio.org/packages/akkoyun/library/Statistical.svg) [![Check Arduino](https://github.com/akkoyun/Statistical/actions/workflows/check-arduino.yml/badge.svg)](https://github.com/akkoyun/Statistical/actions/workflows/check-arduino.yml)
 
-	Build - 01.04.06
+	Build - 01.04.07
 
 ---
 
@@ -68,7 +68,7 @@ Library calculate listed statistical parameters for fixed size arrays.
 </br>
 Library calculate listed statistical parameters for data stream. User set the regression precision for calculating last n data regression.
 
-	* Presicion
+	* Precision
 	* Slope
 	* Offset
 
@@ -78,7 +78,7 @@ Library calculate listed statistical parameters for data stream. User set the re
   <summary>Machine Learning Algorithm</summary>
 
 </br>
-This library will calculate slope of data according last n value. With these slope data system can learn sensor anomaly and make desicion.
+This library will calculate slope of data according last n value. With these slope data system can learn sensor anomaly and make decision.
 
 <img src="/Documents/Pressure_Regression.gif" width="800">
 

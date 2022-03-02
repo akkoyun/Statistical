@@ -112,31 +112,31 @@ void Statistical::Linear_Regression_Calculate(float _Data[][2]) {
 	if (isnan(Linear_Regression_Slope)) Linear_Regression_Slope = 0;
 
 }
-void Statistical::Linear_Regression(float _X, float _Y){
+void Statistical::Linear_Regression(float _Data_X, float _Data_Y){
 
 	// Increase Data Count Variable
 	Linear_Regression_Data_Count++;
 	
 	// Calculate Mean X
-	Linear_Regression_MeanX = Linear_Regression_MeanX + ((_X - Linear_Regression_MeanX) / Linear_Regression_Data_Count);
+	Linear_Regression_MeanX = Linear_Regression_MeanX + ((_Data_X - Linear_Regression_MeanX) / Linear_Regression_Data_Count);
 
 	// Calculate Mean X Square
-	Linear_Regression_MeanX2 = Linear_Regression_MeanX2 + (((_X * _X) - Linear_Regression_MeanX2) / Linear_Regression_Data_Count);
+	Linear_Regression_MeanX2 = Linear_Regression_MeanX2 + (((_Data_X * _Data_X) - Linear_Regression_MeanX2) / Linear_Regression_Data_Count);
 	
 	// Calculate Variance X
 	Linear_Regression_VarianceX = Linear_Regression_MeanX2 - (Linear_Regression_MeanX * Linear_Regression_MeanX);
 
 	// Calculate Mean Y
-	Linear_Regression_MeanY = Linear_Regression_MeanY + ((_Y - Linear_Regression_MeanY) / Linear_Regression_Data_Count);
+	Linear_Regression_MeanY = Linear_Regression_MeanY + ((_Data_Y - Linear_Regression_MeanY) / Linear_Regression_Data_Count);
 
 	// Calculate Mean Y Square
-	Linear_Regression_MeanY2 = Linear_Regression_MeanY2 + (((_Y * _Y) - Linear_Regression_MeanY2) / Linear_Regression_Data_Count);
+	Linear_Regression_MeanY2 = Linear_Regression_MeanY2 + (((_Data_Y * _Data_Y) - Linear_Regression_MeanY2) / Linear_Regression_Data_Count);
 	
 	// Calculate Variance Y
 	Linear_Regression_VarianceY = Linear_Regression_MeanY2 - (Linear_Regression_MeanY * Linear_Regression_MeanY);
 
 	// Calculate Mean XY
-	Linear_Regression_MeanXY = Linear_Regression_MeanXY + (((_X * _Y) - Linear_Regression_MeanXY) / Linear_Regression_Data_Count);
+	Linear_Regression_MeanXY = Linear_Regression_MeanXY + (((_Data_X * _Data_Y) - Linear_Regression_MeanXY) / Linear_Regression_Data_Count);
 
 	// Calculate Covariance XY
 	Linear_Regression_CovarianceXY = Linear_Regression_MeanXY - (Linear_Regression_MeanX * Linear_Regression_MeanY);
@@ -230,7 +230,7 @@ float Statistical::Array_Sq_Sum(float _Data[], uint16_t _Data_Count) {
 	return(_Sq_Sum);
 
 }
-float Statistical::Array_Aritmetic_Average(float _Data[], uint16_t _Data_Count) {
+float Statistical::Array_Arithmetic_Average(float _Data[], uint16_t _Data_Count) {
 
 	// Declare Variable
 	float _Sum = 0;
@@ -238,7 +238,7 @@ float Statistical::Array_Aritmetic_Average(float _Data[], uint16_t _Data_Count) 
 	// Calculate Array Sum
 	_Sum = Array_Sum(_Data, _Data_Count);
 
-	// Calculate Aritmetic Average
+	// Calculate Arithmetic Average
 	float _Average = _Sum / _Data_Count;
 
 	// End Function
@@ -321,15 +321,15 @@ float Statistical::Array_Median(float _Data[], uint16_t _Data_Count) {
 	return(_Median);
 
 }
-float Statistical::Array_Standart_Deviation(float _Data[], uint16_t _Data_Count) {
+float Statistical::Array_Standard_Deviation(float _Data[], uint16_t _Data_Count) {
 
-	// Calculate Aritmetic Average
-	float _Avg = Array_Aritmetic_Average(_Data, _Data_Count);
+	// Calculate Arithmetic Average
+	float _Avg = Array_Arithmetic_Average(_Data, _Data_Count);
 
-	// Set Standart Deviation Variable
+	// Set Standard Deviation Variable
 	float _SDev = 0;
 
-	// Calculate Array Standart Deviation
+	// Calculate Array Standard Deviation
 	for (int i=0; i < _Data_Count; i++) _SDev += sq(_Data[i] - _Avg);
 	_SDev = sqrt(_SDev / (_Data_Count - 1));
 
@@ -337,12 +337,12 @@ float Statistical::Array_Standart_Deviation(float _Data[], uint16_t _Data_Count)
 	return(_SDev);
 
 }
-float Statistical::Array_Standart_Deviation_Error(float _Data[], uint16_t _Data_Count) {
+float Statistical::Array_Standard_Deviation_Error(float _Data[], uint16_t _Data_Count) {
 
-	// Calculate Standart Deviation
-	float _SDev = Array_Standart_Deviation(_Data, _Data_Count);
+	// Calculate Standard Deviation
+	float _SDev = Array_Standard_Deviation(_Data, _Data_Count);
 
-	// Calculate Standart Deviation Error
+	// Calculate Standard Deviation Error
 	float _SDev_Err = (_SDev / sqrt((float)_Data_Count));
 
 	// End Function
@@ -351,11 +351,11 @@ float Statistical::Array_Standart_Deviation_Error(float _Data[], uint16_t _Data_
 }
 float Statistical::Array_Coefficient_Factor(float _Data[], uint16_t _Data_Count) {
 
-	// Calculate Aritmetic Average
-	float _Avg = Array_Aritmetic_Average(_Data, _Data_Count);
+	// Calculate Arithmetic Average
+	float _Avg = Array_Arithmetic_Average(_Data, _Data_Count);
 
-	// Calculate Standart Deviation
-	float _SDev = Array_Standart_Deviation(_Data, _Data_Count);
+	// Calculate Standard Deviation
+	float _SDev = Array_Standard_Deviation(_Data, _Data_Count);
 
 	// Calculate Coefficient Factor
 	float _Coef = (100 * _SDev / _Avg);
@@ -370,7 +370,7 @@ float Statistical::Array_Average(float _Data[], int _Data_Count, int _AVG_Type) 
 	switch (_AVG_Type) {
 		
 		case 1:
-			return(Array_Aritmetic_Average(_Data, _Data_Count));
+			return(Array_Arithmetic_Average(_Data, _Data_Count));
     		break;
   
   		case 2:
@@ -428,7 +428,7 @@ void Statistical::Array_Bubble_Sort(float _Data[], uint16_t _Data_Count) {
 	} while (_New_n > 1);
 
 }
-void Statistical::Array_FILO(float _Array[][2], uint16_t _Data_Count, float _X, float _Y) {
+void Statistical::Array_FILO(float _Array[][2], uint16_t _Data_Count, float _Data_X, float _Data_Y) {
 	
 
 	// Redesign Array
@@ -440,8 +440,8 @@ void Statistical::Array_FILO(float _Array[][2], uint16_t _Data_Count, float _X, 
 	}
 	
 	// Add New Data
-	_Array[_Data_Count-1][0] = _X;
-	_Array[_Data_Count-1][1] = _Y;
+	_Array[_Data_Count-1][0] = _Data_X;
+	_Array[_Data_Count-1][1] = _Data_Y;
 
 }
 
