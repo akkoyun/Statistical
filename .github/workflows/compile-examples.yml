@@ -5,13 +5,11 @@ on:
   push:
     paths:
       - ".github/workflows/compile-examples.yml"
-      - "library.properties"
       - "examples/**"
       - "src/**"
   pull_request:
     paths:
       - ".github/workflows/compile-examples.yml"
-      - "library.properties"
       - "examples/**"
       - "src/**"
   schedule:
@@ -33,9 +31,12 @@ jobs:
 
       matrix:
         board:
-          - fqbn: arduino:avr:mega:cpu=atmega2560
+          - fqbn: arduino:avr:nano
             platforms: |
-              - name: arduino:avr:mega:cpu=atmega2560
+              - name: arduino:avr
+          - fqbn: arduino:avr:mega
+            platforms: |
+              - name: arduino:avr
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -49,6 +50,8 @@ jobs:
           libraries: |
             # Install the library from the local path.
             - source-path: ./
+            # Additional library dependencies can be listed here.
+            # See: https://github.com/arduino/compile-sketches#libraries
           sketch-paths: |
             - examples
           enable-deltas-report: true
