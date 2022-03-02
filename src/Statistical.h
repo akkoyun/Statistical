@@ -97,7 +97,7 @@ public:
 	 * @param _X Data array
 	 * @param _Y Data size
 	 */
-	void Linear_Regression(float _X, float _Y);
+	void Linear_Regression(float _Data_X, float _Data_Y);
 
 	/**
 	 * @brief Linear Regression Data Clear
@@ -154,7 +154,7 @@ public:
 	 * @param _Data_Count Array size
 	 * @return float - Aritmetic average value of array.
 	 */
-	float Array_Aritmetic_Average(float _Data[], uint16_t _Data_Count);
+	float Array_Arithmetic_Average(float _Data[], uint16_t _Data_Count);
 
 	/**
 	 * @brief Calculate the array geometric average.
@@ -207,7 +207,7 @@ public:
 	 * @param _Data_Count Array size
 	 * @return float - Standart deviation value of array.
 	 */
-	float Array_Standart_Deviation(float _Data[], uint16_t _Data_Count);
+	float Array_Standard_Deviation(float _Data[], uint16_t _Data_Count);
 
 	/**
 	 * @brief Calculate the array standart deviation error.
@@ -216,7 +216,7 @@ public:
 	 * @param _Data_Count Array size
 	 * @return float - Standart deviation error value of array.
 	 */
-	float Array_Standart_Deviation_Error(float _Data[], uint16_t _Data_Count);
+	float Array_Standard_Deviation_Error(float _Data[], uint16_t _Data_Count);
 
 	/**
 	 * @brief Calculate the array coefficient factor.
@@ -243,7 +243,7 @@ public:
 	 * @param _Data_Count Array size
 	 * @param _Data New Array Data
 	 */	
-	void Array_FILO(float _Array[][2], uint16_t _Data_Count, float _X, float _Y);
+	void Array_FILO(float _Array[][2], uint16_t _Data_Count, float _Data_X, float _Data_Y);
 
 private:
 
