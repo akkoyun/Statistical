@@ -35,7 +35,7 @@ jobs:
         board:
           - fqbn: arduino:avr:mega:cpu=atmega2560
             platforms: |
-              - name: arduino:samd
+              - name: arduino:avr:mega
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
