@@ -33,9 +33,9 @@ jobs:
 
       matrix:
         board:
-          - fqbn: arduino:avr
+          - fqbn: arduino:avr:mega:cpu=atmega2560
             platforms: |
-              - name: arduino:avr
+              - name: arduino:avr:mega:cpu=atmega2560
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
