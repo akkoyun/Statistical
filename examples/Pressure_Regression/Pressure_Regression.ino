@@ -11,11 +11,11 @@ void setup() {
 	// Start Serial
     Serial.begin(115200);
     
-    // Set Presicion
-    DataSet.Linear_Regression_Presicion = 5;
+    // Set Precision
+    DataSet.Linear_Regression_Precision = 5;
 
     // First Pressure Read
-    for (uint8_t i = 0; i < DataSet.Linear_Regression_Presicion + 5; i++) {
+    for (uint8_t i = 0; i < DataSet.Linear_Regression_Precision + 5; i++) {
         
         // Measure Pressure
         float _Pressure = Sensor.Read_Analog_Pressure(2, 50);

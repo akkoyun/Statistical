@@ -30,9 +30,9 @@ public:
 	uint16_t		Stream_Data_Count_Avg				= 0;
 	float 			Stream_Average 						= 0;
 	
-	// Linear Regression Definations
+	// Linear Regression Definitions
 	uint16_t		Linear_Regression_Data_Count		= 0;
-	uint16_t		Linear_Regression_Presicion			= 0;
+	uint16_t		Linear_Regression_Precision			= 0;
 	float 			Linear_Regression_Slope				= 0;
 	float 			Linear_Regression_Offset			= 0;
 	
@@ -148,11 +148,11 @@ public:
 	float Array_Sq_Sum(float _Data[], uint16_t _Data_Count);
 
 	/**
-	 * @brief Calculate the array aritmetic average.
+	 * @brief Calculate the array arithmetic average.
 	 * @version 01.00.00
 	 * @param _Data Data array
 	 * @param _Data_Count Array size
-	 * @return float - Aritmetic average value of array.
+	 * @return float - Arithmetic average value of array.
 	 */
 	float Array_Arithmetic_Average(float _Data[], uint16_t _Data_Count);
 
@@ -179,7 +179,7 @@ public:
 	 * @version 01.00.00
 	 * @param _Data Data array
 	 * @param _Data_Count Array size
-	 * @return float - Extendet RMS average value of array.
+	 * @return float - Extended RMS average value of array.
 	 */
 	float Array_Ext_RMS_Average(float _Data[], uint16_t _Data_Count);
 
@@ -201,20 +201,20 @@ public:
 	float Array_Median(float _Data[], uint16_t _Data_Count);
 
 	/**
-	 * @brief Calculate the array standart deviation.
+	 * @brief Calculate the array standard deviation.
 	 * @version 01.00.00
 	 * @param _Data Data array
 	 * @param _Data_Count Array size
-	 * @return float - Standart deviation value of array.
+	 * @return float - Standard deviation value of array.
 	 */
 	float Array_Standard_Deviation(float _Data[], uint16_t _Data_Count);
 
 	/**
-	 * @brief Calculate the array standart deviation error.
+	 * @brief Calculate the array standard deviation error.
 	 * @version 01.00.00
 	 * @param _Data Data array
 	 * @param _Data_Count Array size
-	 * @return float - Standart deviation error value of array.
+	 * @return float - Standard deviation error value of array.
 	 */
 	float Array_Standard_Deviation_Error(float _Data[], uint16_t _Data_Count);
 
