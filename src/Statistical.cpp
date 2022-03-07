@@ -9,87 +9,33 @@
 #include "Statistical.h"
 
 // Stream Statistics
-float Statistical::Stream_Max(float _Data) {
+void Statistical::Stream_Statistic(float _Data) {
 
-	// Increase Data Count Variable
-	Stream_Data_Count_Max++;
+	// Set Data Count (+1)
+	Data_Count++;
 
 	// Calculate Max Value
 	if (Stream_Maximum == 0) Stream_Maximum = _Data;
 	if (_Data > Stream_Maximum) Stream_Maximum = _Data;
 
-	// End Function
-	return(Stream_Maximum);
-
-}
-void Statistical::Stream_Clear_Max(void) {
-
-	// Celar Stream Variables
-	Stream_Data_Count_Max = 0;
-	Stream_Maximum = 0;
-
-}
-float Statistical::Stream_Min(float _Data) {
-
-	// Increase Data Count Variable
-	Stream_Data_Count_Min++;
-
 	// Calculate Min Value
 	if (Stream_Minimum == 0) Stream_Minimum = _Data;
 	if (_Data < Stream_Minimum) Stream_Minimum = _Data;
 
-	// End Function
-	return(Stream_Minimum);
-
-}
-void Statistical::Stream_Clear_Min(void) {
-
-	// Celar Stream Variables
-	Stream_Data_Count_Min = 0;
-	Stream_Minimum = 0;
-
-}
-float Statistical::Stream_Aritmetic_Average(float _Data) {
-
-	// Increase Data Count Variable
-	Stream_Data_Count_Avg++;
-
 	// Calculate Avg Value
 	if (Stream_Average == 0) Stream_Average = _Data;
-	Stream_Average = Stream_Average + ((_Data - Stream_Average) / Stream_Data_Count_Avg);
-
-	// End Function
-	return(Stream_Average);
+	Stream_Average = Stream_Average + ((_Data - Stream_Average) / Data_Count);
 
 }
-void Statistical::Stream_Clear_Aritmetic_Average(void) {
+void Statistical::Data_Clear(void) {
+
+	// Clear Data Count
+	Data_Count = 0;
 
 	// Celar Stream Variables
-	Stream_Data_Count_Avg = 0;
 	Stream_Average = 0;
-
-}
-void Statistical::Stream_Statistic(float _Data) {
-
-	// Calculate Maximum
-	Stream_Max(_Data);
-
-	// Calculate Minimum
-	Stream_Min(_Data);
-
-	// Calculate Average
-	Stream_Aritmetic_Average(_Data);
-
-}
-void Statistical::Stream_Clear(void) {
-
-	// Celar Stream Variables
-	Stream_Data_Count_Max = 0;
 	Stream_Maximum = 0;
-	Stream_Data_Count_Min = 0;
 	Stream_Minimum = 0;
-	Stream_Data_Count_Avg = 0;
-	Stream_Average = 0;
 
 }
 
