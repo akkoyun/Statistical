@@ -23,43 +23,54 @@ public:
 	// ************************************************************
 
 	// Stream Calculation Variables
-	uint16_t		Data_Count							= 0;
+	uint16_t		Stream_Data_Count					= 0;
 	float 			Stream_Average 						= 0;
 	float 			Stream_Minimum 						= 0;
 	float 			Stream_Maximum 						= 0;
-
-	// Linear Regression Definitions
-	uint16_t		Linear_Regression_Data_Count		= 0;
-	uint16_t		Linear_Regression_Precision			= 0;
-	float 			Linear_Regression_Slope				= 0;
-	float 			Linear_Regression_Offset			= 0;
 	
 	// ************************************************************
 	// Public Functions
 	// ************************************************************
 
+	/**
+	 * @brief Calculate Stream Statistic Parameters
+	 * @version 01.00.00
+	 * @param _Data Stream Data
+	 */
 	void Stream_Statistic(float _Data);
-	void Data_Clear(void);
 
 	/**
-	 * @brief Calculate Linear Regression
+	 * @brief Clear Stream Statistic Parameters
 	 * @version 01.00.00
-	 * @param _X Data array
-	 * @param _Y Data size
 	 */
-	void Linear_Regression(float _Data_X, float _Data_Y);
+	void Stream_Data_Clear(void);
 
 	/**
-	 * @brief Linear Regression Data Clear
-	 * @version 01.00.00
+	 * @brief Calculate Regression Offset
+	 * 
+	 * @param _Data Data Array
+	 * @param _Data_Count Data Count
+	 * @return float Offset Value
 	 */
-	void Linear_Regression_Data_Clear(void);
+	float Linear_Regression_Offset(float _Data[][2], uint16_t _Data_Count);
 
 	/**
-	 * @brief Linear Regression Calculate
-	 * @version 01.00.00
+	 * @brief Calculate Regression Slope
+	 * 
+	 * @param _Data Data Array
+	 * @param _Data_Count Data Count
+	 * @return float Slope Value
 	 */
-	void Linear_Regression_Calculate(float _Data[][2]);
+	float Linear_Regression_Slope(float _Data[][2], uint16_t _Data_Count);
+	
+	/**
+	 * @brief Calculate Regression R2
+	 * 
+	 * @param _Data Data Array
+	 * @param _Data_Count Data Count
+	 * @return float R2 Value
+	 */
+	float Linear_Regression_R2(float _Data[][2], uint16_t _Data_Count);
 
 	/**
 	 * @brief Calculate the array sum.
@@ -200,16 +211,6 @@ private:
 	// ************************************************************
 	// Private Variables
 	// ************************************************************
-
-	// Linear Regression Variables
-	float 			Linear_Regression_MeanX				= 0;
-	float 			Linear_Regression_MeanX2			= 0;
-	float 			Linear_Regression_VarianceX			= 0;
-	float 			Linear_Regression_MeanY				= 0;
-	float 			Linear_Regression_MeanY2			= 0;
-	float 			Linear_Regression_MeanXY			= 0;
-	float 			Linear_Regression_VarianceY			= 0;
-	float 			Linear_Regression_CovarianceXY		= 0;
 	
 	// ************************************************************
 	// Private Functions
