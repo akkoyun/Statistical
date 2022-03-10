@@ -1,6 +1,6 @@
 {
 	"name": "Statistical",
-	"version": "1.4.14",
+	"version": "1.4.15",
 	"keywords": "Statistical, Max, Min, Average, Regression, Data, Sensor, Slope, Offset",
 	"description": "Function calculates statistical parameters of data stream and array",
 	"authors":
@@ -31,10 +31,10 @@
 			]
 		},
 		{
-			"name": "Regression",
-			"base": "examples/Regression/",
+			"name": "Linear Regression",
+			"base": "examples/Linear_Regression/",
 			"files": [
-				"Regression.ino"
+				"Linear_Regression.ino"
 			]
 		},
 		{

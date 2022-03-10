@@ -34,7 +34,7 @@ LinearRegression                KEYWORD2
 # Constants (LITERAL1)
 #######################################
 
-Data_Count						LITERAL1
+Stream_Data_Count				LITERAL1
 Stream_Average					LITERAL1
 Stream_Minimum					LITERAL1
 Stream_Maximum					LITERAL1

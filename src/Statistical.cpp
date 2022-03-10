@@ -12,7 +12,7 @@
 void Statistical::Stream_Statistic(float _Data) {
 
 	// Set Data Count (+1)
-	Data_Count++;
+	Stream_Data_Count++;
 
 	// Calculate Max Value
 	if (Stream_Maximum == 0) Stream_Maximum = _Data;
@@ -24,13 +24,13 @@ void Statistical::Stream_Statistic(float _Data) {
 
 	// Calculate Avg Value
 	if (Stream_Average == 0) Stream_Average = _Data;
-	Stream_Average = Stream_Average + ((_Data - Stream_Average) / Data_Count);
+	Stream_Average = Stream_Average + ((_Data - Stream_Average) / Stream_Data_Count);
 
 }
-void Statistical::Data_Clear(void) {
+void Statistical::Stream_Data_Clear(void) {
 
 	// Clear Data Count
-	Data_Count = 0;
+	Stream_Data_Count = 0;
 
 	// Celar Stream Variables
 	Stream_Average = 0;
@@ -40,74 +40,169 @@ void Statistical::Data_Clear(void) {
 }
 
 // Linear Regression Statistics
-void Statistical::Linear_Regression_Calculate(float _Data[][2]) {
+float Statistical::Linear_Regression_Offset(float _Data[][2], uint16_t _Data_Count) {
 
-	// Calculate array regression
-	for (uint16_t i = 0; i < Linear_Regression_Precision; i++) {
+	// Declare Variables
+	float _X[_Data_Count];
+	float _Y[_Data_Count];
+	float _Sum_X = 0;
+	float _Sum_Y = 0;
+	float _Sum_X2 = 0;
+	float _Sum_XY = 0;
+	float _b0 = 0;
 
-		// Print Array
-		//Serial.print(_Data[i][0]); Serial.print("-"); Serial.println(_Data[i][1]);
+	// Set X and Y Array
+	for (uint16_t i = 0; i < _Data_Count; i++) {
 
-		// Push Data
-		Linear_Regression(_Data[i][0], _Data[i][1]);
+		// Set X
+		_X[i] = _Data[i][0];
+
+		// Set Y
+		_Y[i] = _Data[i][1];
 
 	}
 
-	// Control for valid data
-	if (isinf(Linear_Regression_Slope)) Linear_Regression_Slope = 0;
-	if (isnan(Linear_Regression_Slope)) Linear_Regression_Slope = 0;
+	// Calculate Sum X
+	_Sum_X = Array_Sum(_X, _Data_Count);
+
+	// Calculate Sum Y
+	_Sum_Y = Array_Sum(_Y, _Data_Count);
+
+	// Calculate Sum xy
+	for (uint16_t i = 0; i < _Data_Count; i++) {
+
+		// Set Sum xy
+		_Sum_XY += _X[i] * _Y[i];
+
+	}
+
+	// Calculate Sum X2
+	_Sum_X2 = Array_Sq_Sum(_X, _Data_Count);
+
+	// Calculate Slope
+	_b0 = ((_Sum_X2 * _Sum_Y) - (_Sum_X * _Sum_XY)) / ((_Data_Count * _Sum_X2) - (_Sum_X * _Sum_X));
+
+	// End Function
+	return(_b0);
 
 }
-void Statistical::Linear_Regression(float _Data_X, float _Data_Y){
+float Statistical::Linear_Regression_Slope(float _Data[][2], uint16_t _Data_Count) {
 
-	// Increase Data Count Variable
-	Linear_Regression_Data_Count++;
-	
+	// Declare Variables
+	float _X[_Data_Count];
+	float _Y[_Data_Count];
+	float _Sum_X = 0;
+	float _Sum_Y = 0;
+	float _Sum_XY = 0;
+	float _Sum_X2 = 0;
+	float _b1 = 0;
+
+	// Set X and Y Array
+	for (uint16_t i = 0; i < _Data_Count; i++) {
+
+		// Set X
+		_X[i] = _Data[i][0];
+
+		// Set Y
+		_Y[i] = _Data[i][1];
+
+	}
+
+	// Calculate Sum X
+	_Sum_X = Array_Sum(_X, _Data_Count);
+
+	// Calculate Sum Y
+	_Sum_Y = Array_Sum(_Y, _Data_Count);
+
+	// Calculate Sum xy
+	for (uint16_t i = 0; i < _Data_Count; i++) {
+
+		// Set Sum xy
+		_Sum_XY += _X[i] * _Y[i];
+
+	}
+
+	// Calculate Sum X2
+	_Sum_X2 = Array_Sq_Sum(_X, _Data_Count);
+
+	// Calculate Slope
+	_b1 = ((_Data_Count * _Sum_XY) - (_Sum_X * _Sum_Y)) / ((_Data_Count * _Sum_X2) - (_Sum_X * _Sum_X));
+
+	// End Function
+	return(_b1);
+
+}
+float Statistical::Linear_Regression_R2(float _Data[][2], uint16_t _Data_Count) {
+
+	// Declare Variables
+	float _X[_Data_Count];
+	float _Y[_Data_Count];
+	float _Mean_X;
+	float _Mean_Y;
+	float _x[_Data_Count]; // x = X - Xavg
+	float _y[_Data_Count]; // y = Y - Yavg
+	float _Sum_xy;
+	float _Sum_x2;
+	float _Sum_y2;
+	float _R2;
+
+	// Set X and Y Array
+	for (uint16_t i = 0; i < _Data_Count; i++) {
+
+		// Set X
+		_X[i] = _Data[i][0];
+
+		// Set Y
+		_Y[i] = _Data[i][1];
+
+	}
+
 	// Calculate Mean X
-	Linear_Regression_MeanX = Linear_Regression_MeanX + ((_Data_X - Linear_Regression_MeanX) / Linear_Regression_Data_Count);
-
-	// Calculate Mean X Square
-	Linear_Regression_MeanX2 = Linear_Regression_MeanX2 + (((_Data_X * _Data_X) - Linear_Regression_MeanX2) / Linear_Regression_Data_Count);
-	
-	// Calculate Variance X
-	Linear_Regression_VarianceX = Linear_Regression_MeanX2 - (Linear_Regression_MeanX * Linear_Regression_MeanX);
+	_Mean_X = Array_Arithmetic_Average(_X, _Data_Count);
 
 	// Calculate Mean Y
-	Linear_Regression_MeanY = Linear_Regression_MeanY + ((_Data_Y - Linear_Regression_MeanY) / Linear_Regression_Data_Count);
+	_Mean_Y = Array_Arithmetic_Average(_Y, _Data_Count);
 
-	// Calculate Mean Y Square
-	Linear_Regression_MeanY2 = Linear_Regression_MeanY2 + (((_Data_Y * _Data_Y) - Linear_Regression_MeanY2) / Linear_Regression_Data_Count);
-	
-	// Calculate Variance Y
-	Linear_Regression_VarianceY = Linear_Regression_MeanY2 - (Linear_Regression_MeanY * Linear_Regression_MeanY);
+	// Set x and y Array
+	for (uint16_t i = 0; i < _Data_Count; i++) {
 
-	// Calculate Mean XY
-	Linear_Regression_MeanXY = Linear_Regression_MeanXY + (((_Data_X * _Data_Y) - Linear_Regression_MeanXY) / Linear_Regression_Data_Count);
+		// Set x
+		_x[i] = _X[i] - _Mean_X;
 
-	// Calculate Covariance XY
-	Linear_Regression_CovarianceXY = Linear_Regression_MeanXY - (Linear_Regression_MeanX * Linear_Regression_MeanY);
+		// Set y
+		_y[i] = _Y[i] - _Mean_Y;
 
-	// Calculate a
-	Linear_Regression_Slope = Linear_Regression_CovarianceXY / Linear_Regression_VarianceX;
-	
-	// Calculate b
-	Linear_Regression_Offset = Linear_Regression_MeanY - (Linear_Regression_Slope * Linear_Regression_MeanX);
-	
-}
-void Statistical::Linear_Regression_Data_Clear(void) {
+	}
 
-	// Clear Regression Variables
-	Linear_Regression_Data_Count = 0;
-	Linear_Regression_MeanX = 0;
-	Linear_Regression_MeanX2 = 0;
-	Linear_Regression_VarianceX = 0;
-	Linear_Regression_MeanY = 0;
-	Linear_Regression_MeanY2 = 0;
-	Linear_Regression_MeanXY = 0;
-	Linear_Regression_VarianceY = 0;
-	Linear_Regression_CovarianceXY = 0;
-	Linear_Regression_Slope = 0;
-	Linear_Regression_Offset	= 0;
+	// Calculate Sum xy
+	for (uint16_t i = 0; i < _Data_Count; i++) {
+
+		// Set Sum xy
+		_Sum_xy += _x[i] * _y[i];
+
+	}
+
+	// Calculate Sum x2
+	for (uint16_t i = 0; i < _Data_Count; i++) {
+
+		// Set Sum x2
+		_Sum_x2 += _x[i] * _x[i];
+
+	}
+
+	// Calculate Sum y2
+	for (uint16_t i = 0; i < _Data_Count; i++) {
+
+		// Set Sum y2
+		_Sum_y2 += _y[i] * _y[i];
+
+	}
+
+	// Calculate R2
+	_R2 = (_Sum_xy * _Sum_xy) / (_Sum_x2 * _Sum_y2);
+
+	// End Function
+	return(_R2);
 
 }
 
