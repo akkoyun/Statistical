@@ -11,20 +11,20 @@
 // Stream Statistics
 void Statistical::Stream_Statistic(float _Data) {
 
-	// Set Data Count (+1)
-	Stream_Data_Count++;
-
 	// Calculate Max Value
-	if (Stream_Maximum == 0) Stream_Maximum = _Data;
-	if (_Data > Stream_Maximum) Stream_Maximum = _Data;
+	if (Stream_Data_Count == 0) Stream_Maximum = _Data;
+	if (Stream_Data_Count > 0 and _Data > Stream_Maximum) Stream_Maximum = _Data;
 
 	// Calculate Min Value
-	if (Stream_Minimum == 0) Stream_Minimum = _Data;
-	if (_Data < Stream_Minimum) Stream_Minimum = _Data;
+	if (Stream_Data_Count == 0) Stream_Minimum = _Data;
+	if (Stream_Data_Count > 0 and _Data < Stream_Minimum) Stream_Minimum = _Data;
 
 	// Calculate Avg Value
-	if (Stream_Average == 0) Stream_Average = _Data;
-	Stream_Average = Stream_Average + ((_Data - Stream_Average) / Stream_Data_Count);
+	if (Stream_Data_Count == 0) Stream_Average = _Data;
+	if (Stream_Data_Count > 0) Stream_Average = Stream_Average + ((_Data - Stream_Average) / Stream_Data_Count);
+
+	// Set Data Count (+1)
+	Stream_Data_Count++;
 
 }
 void Statistical::Stream_Data_Clear(void) {
