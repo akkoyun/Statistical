@@ -1,6 +1,14 @@
 // Include Statistal Library
 #include <Statistical.h>
 
+
+// Set Data
+float Data[5];
+
+// Construct Object
+Array_Stats Data_Array(Data, 1);
+
+
 void setup() {
 
 	// Start Serial
@@ -9,21 +17,23 @@ void setup() {
 	// Set Data
 	Serial.println(F("Learning Data..."));
 
-}
+    // Set FILO
+    Data_Array.Set_FILO_Size(4);
 
-void loop() {
-
-	// Set Data
-	double Data[] = {220.14, 221.36, 218.21, 217.6, 215.7, 225.8, 220.14};
-
-	// Construct Object
-	Array_Stats Data_Array(Data, 7);
+    // Add Data to FILO Array
+    Data_Array.FILO_Add_Data(220.12);
+    Data_Array.FILO_Add_Data(214.35);
+    Data_Array.FILO_Add_Data(200.14);
+    Data_Array.FILO_Add_Data(212.80);
+    Data_Array.FILO_Add_Data(242.33);
+    Data_Array.FILO_Add_Data(215.99);
+    Data_Array.FILO_Add_Data(220.12);
 
 	// Print Stats
 	Serial.println(F("------------------------------------------------"));
-	Serial.print(F("Data Array                     : ")); Data_Array.Array();
-	Serial.println(F("------------------------------------------------"));
 	Serial.print(F("Array Size                     : ")); Serial.println(Data_Array.Size());
+	Serial.println(F("------------------------------------------------"));
+	Serial.print(F("Data Array                     : ")); Data_Array.Array();
 	Serial.print(F("Array Sum                      : ")); Serial.println(Data_Array.Sum());
 	Serial.print(F("Array Min                      : ")); Serial.println(Data_Array.Min());
 	Serial.print(F("Array Max                      : ")); Serial.println(Data_Array.Max());
@@ -43,8 +53,10 @@ void loop() {
 	Serial.println(F("------------------------------------------------"));
 	Serial.print(F("Sorted Data Array              : ")); Data_Array.Array();
 
-	// Loop Delay
-	delay(5000);
+}
+
+void loop() {
+
 
 }
 

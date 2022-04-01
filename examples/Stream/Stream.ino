@@ -1,6 +1,7 @@
 #include <Statistical.h>
 
-Statistical DataSet;
+// Construct Object
+Stream_Stats _Stream;
 
 void setup() {
 
@@ -13,21 +14,21 @@ void loop() {
 
 	// Set Data
     Serial.println("Learning Data...");
-    DataSet.Stream_Statistic(125.2);
-	DataSet.Stream_Statistic(122.2);
-	DataSet.Stream_Statistic(121.2);
-	DataSet.Stream_Statistic(128.2);
-	DataSet.Stream_Statistic(132.2);
+    _Stream.Add_Data(125.2);
+	_Stream.Add_Data(122.2);
+	_Stream.Add_Data(121.2);
+	_Stream.Add_Data(128.2);
+	_Stream.Add_Data(132.2);
     
     // Print Calculations
-    Serial.print("Stream Data Count : "); Serial.println(DataSet.Stream_Data_Count);
-    Serial.print("Stream Avg Value  : "); Serial.println(DataSet.Stream_Average);
-    Serial.print("Stream Min Value  : "); Serial.println(DataSet.Stream_Minimum);
-    Serial.print("Stream Max Value  : "); Serial.println(DataSet.Stream_Maximum);
+    Serial.print("Stream Data Count : "); Serial.println(_Stream.Get_Data_Count());
+    Serial.print("Stream Avg Value  : "); Serial.println(_Stream.Get_Average());
+    Serial.print("Stream Min Value  : "); Serial.println(_Stream.Get_Min());
+    Serial.print("Stream Max Value  : "); Serial.println(_Stream.Get_Max());
     Serial.println("----------------");
 
 	// Reset
-    DataSet.Stream_Data_Clear();
+    _Stream.Data_Clear();
     
     delay(1000);
     
