@@ -1,8 +1,5 @@
 #include <Statistical.h>
 
-// Construct Object
-Stream_Stats _Stream;
-
 void setup() {
 
 	// Start Serial
@@ -12,13 +9,18 @@ void setup() {
 
 void loop() {
 
-	// Set Data
+    // Construct Object
+    Stream_Stats<float> _Stream;
+
+	// Learn Print
     Serial.println("Learning Data...");
-    _Stream.Add_Data(125.2);
-	_Stream.Add_Data(122.2);
-	_Stream.Add_Data(121.2);
-	_Stream.Add_Data(128.2);
-	_Stream.Add_Data(132.2);
+
+	// Set Data
+    _Stream.Add(125.2);
+	_Stream.Add(122.2);
+	_Stream.Add(121.2);
+	_Stream.Add(128.2);
+	_Stream.Add(132.2);
     
     // Print Calculations
     Serial.print("Stream Data Count : "); Serial.println(_Stream.Get_Data_Count());
@@ -28,7 +30,7 @@ void loop() {
     Serial.println("----------------");
 
 	// Reset
-    _Stream.Data_Clear();
+    _Stream.Clear();
     
     delay(1000);
     

@@ -14,10 +14,12 @@ void setup() {
 void loop() {
 
 	// Set Data
-	double Data[] = {220.14, 221.36, 218.21, 217.6, 215.7, 225.8, 220.14};
+//	float Data[] = {220.14, 221.36, 218.21, 217.6, 215.7, 225.8, 220.14};
+//	double Data[] = {220.14, 221.36, 218.21, 217.6, 215.7, 225.8, 220.14};
+	uint8_t Data[] = {14, 36, 21, 6, 7, 14};
 
 	// Construct Object
-	Array_Stats Data_Array(Data, 7);
+	Array_Stats<uint8_t> Data_Array(Data, sizeof(Data) / sizeof(Data[0]));
 
 	// Print Stats
 	Serial.println(F("------------------------------------------------"));

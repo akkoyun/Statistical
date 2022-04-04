@@ -6,7 +6,7 @@
 float Data[5];
 
 // Construct Object
-Array_Stats Data_Array(Data, 1);
+Array_Stats<float> Data_Array(Data, sizeof(Data) / sizeof(Data[0]));
 
 
 void setup() {
