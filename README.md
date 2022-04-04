@@ -1,9 +1,9 @@
-# Statistical Library <sup>V1.4</sup>
+# Statistical Library <sup>V2.0</sup>
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/akkoyun/Statistical) ![arduino-library-badge](https://www.ardu-badge.com/badge/Statistical.svg?) ![Visits Badge](https://badges.pufler.dev/visits/akkoyun/Statistical) ![GitHub stars](https://img.shields.io/github/stars/akkoyun/Statistical?style=flat&logo=github) ![Updated Badge](https://badges.pufler.dev/updated/akkoyun/Statistical) ![PlatformIO Registry](https://badges.registry.platformio.org/packages/akkoyun/library/Statistical.svg) 
 [![Check Arduino](https://github.com/akkoyun/Statistical/actions/workflows/check-arduino.yml/badge.svg)](https://github.com/akkoyun/Statistical/actions/workflows/check-arduino.yml) [![Compile Examples](https://github.com/akkoyun/Statistical/actions/workflows/compile-examples.yml/badge.svg)](https://github.com/akkoyun/Statistical/actions/workflows/compile-examples.yml) [![Spell Check](https://github.com/akkoyun/Statistical/actions/workflows/spell-check.yml/badge.svg)](https://github.com/akkoyun/Statistical/actions/workflows/spell-check.yml)
 
-	Build - 02.00.02
+	Build - 02.00.03
 
 ---
 
@@ -22,20 +22,24 @@ A bubble sort algorithm is also contained in this library which was necessary to
 </br>
 Library calculate listed statistical parameters for fixed size arrays.
 
+	* Average
 	* Sum
-	* Maximum
-	* Minimum
-	* Square Sum
-	* Arithmetic Average
-	* Geometric Average
-	* RMS Average
-	* 1 Sigma RMS Average
-	* Bubble Sort
-	* Median
-	* Standard Deviation
-	* Standard Deviation Error
-	* Coefficient Factor
-	* Array FILO
+	* Max
+	* Min
+	* Sq_Sum
+	* Arithmetic_Average
+	* Geometric_Average
+	* RMS_Average
+	* Ext_RMS_Average
+	* Quartile
+	* IQR
+	* Standard_Deviation
+	* Standard_Deviation_Error
+	* Variance
+	* Bubble_Sort
+	* Array
+	* Set_FILO_Size
+	* FILO_Add_Data
 
 </details>
 
@@ -70,7 +74,6 @@ Library calculate listed statistical parameters for fixed size arrays.
 </br>
 Library calculate listed statistical parameters for data stream. User set the regression precision for calculating last n data regression.
 
-	* Precision
 	* Slope
 	* Offset
 	* R2
