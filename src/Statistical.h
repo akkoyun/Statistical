@@ -36,7 +36,7 @@ template <typename Data_Type>  class Array_Stats {
 		};
 
 		/**
-		 * @brief Function constractor
+		 * @brief Function constructor
 		 * @version 01.00.00
 		 * @param _Data Data array
 		 * @param _Data_Count Array size
@@ -551,7 +551,7 @@ template <typename Data_Type>  class Stream_Stats {
 	public:
 
 		/**
-		 * @brief Function constractor
+		 * @brief Function constructor
 		 * @version 01.00.00
 		 */
 		Stream_Stats(void) : Data_Count(0), Average(0), Min(0), Max(0) {
@@ -661,7 +661,7 @@ template <typename Data_Type_X, typename Data_Type_Y> class Linear_Regression {
 	public:
 
 		/**
-		 * @brief Function constractor
+		 * @brief Function constructor
 		 * @version 01.00.00
 		 */
 		Linear_Regression(Data_Type_X * _Data_X, Data_Type_Y * _Data_Y, size_t _Data_Count) : Data_X(_Data_X), Data_Y(_Data_Y), Data_Count(_Data_Count)  {
