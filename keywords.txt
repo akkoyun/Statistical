@@ -6,49 +6,50 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-Stats							KEYWORD1
+Array_Stats						KEYWORD1
+Stream_Stats					KEYWORD1
+Linear_Regression				KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 
-Array_Sum                       KEYWORD2
-Array_Max                       KEYWORD2
-Array_Min                       KEYWORD2
-Array_Sq_Sum                    KEYWORD2
-Array_Aritmetic_Average         KEYWORD2
-Array_Geometric_Average         KEYWORD2
-Array_RMS_Average               KEYWORD2
-Array_Ext_RMS_Average           KEYWORD2
-Array_Bubble_Sort               KEYWORD2
-Array_Median                    KEYWORD2
-Array_Standart_Deviation        KEYWORD2
-Array_Standart_Deviation_Error  KEYWORD2
-Array_Coefficient_Factor        KEYWORD2
-Array_Average                   KEYWORD2
-Stream_Statistic                KEYWORD2
-Data_Clear                      KEYWORD2
-LinearRegression                KEYWORD2
+Average                         KEYWORD2
+Sum                             KEYWORD2
+Max                             KEYWORD2
+Min                             KEYWORD2
+Sq_Sum                          KEYWORD2
+Arithmetic_Average              KEYWORD2
+Geometric_Average               KEYWORD2
+RMS_Average                     KEYWORD2
+Ext_RMS_Average                 KEYWORD2
+Quartile                        KEYWORD2
+IQR                             KEYWORD2
+Standard_Deviation              KEYWORD2
+Standard_Deviation_Error        KEYWORD2
+Variance                        KEYWORD2
+Bubble_Sort                     KEYWORD2
+Array                           KEYWORD2
+Set_FILO_Size                   KEYWORD2
+FILO_Add_Data                   KEYWORD2
+Add                             KEYWORD2
+Clear                           KEYWORD2
+Get_Data_Count                  KEYWORD2
+Get_Average                     KEYWORD2
+Get_Min                         KEYWORD2
+Get_Max                         KEYWORD2
+Offset                          KEYWORD2
+Slope                           KEYWORD2
+R2                              KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
 #######################################
 
-Stream_Data_Count				LITERAL1
-Stream_Average					LITERAL1
-Stream_Minimum					LITERAL1
-Stream_Maximum					LITERAL1
-Array_Average					LITERAL1
-Array_SDev						LITERAL1
-Array_Minimum					LITERAL1
-Array_Maximum					LITERAL1
-Linear_Regression_MeanX			LITERAL1
-Linear_Regression_MeanX2		LITERAL1
-Linear_Regression_VarianceX		LITERAL1
-Linear_Regression_MeanY			LITERAL1
-Linear_Regression_MeanY2		LITERAL1
-Linear_Regression_MeanXY		LITERAL1
-Linear_Regression_VarianceY		LITERAL1
-Linear_Regression_CovarianceXY	LITERAL1
-Linear_Regression_a				LITERAL1
-Linear_Regression_b				LITERAL1
+Data  				            LITERAL1
+Data_Count					    LITERAL1
+Average					        LITERAL1
+Min					            LITERAL1
+Max					            LITERAL1
+Data_X					        LITERAL1
+Data_Y					        LITERAL1
