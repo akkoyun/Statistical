@@ -250,7 +250,7 @@ template <typename Data_Type>  class Array_Stats {
 			_Sum -= sq(Max());
 
 			// Calculate RSM Average
-			double _Ext_RMS_Avg = (sqrt(_Sum / this->Data_Count));
+			double _Ext_RMS_Avg = (sqrt(_Sum / (this->Data_Count - 2)));
 
 			// Handle Calculation
 			if (isnan(_Ext_RMS_Avg)) _Ext_RMS_Avg = 0;
