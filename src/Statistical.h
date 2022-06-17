@@ -539,6 +539,7 @@ template <typename Data_Type>  class Stream_Stats {
 		Data_Type Average;
 		Data_Type Min;
 		Data_Type Max;
+		Data_Type Last;
 
 	public:
 
@@ -569,6 +570,9 @@ template <typename Data_Type>  class Stream_Stats {
 			if (this->Data_Count == 0) this->Average = _Data;
 			if (this->Data_Count > 0) this->Average = this->Average + ((_Data - this->Average) / this->Data_Count);
 
+			// Set Last Value
+			this->Last = _Data;
+
 			// Set Data Count (+1)
 			this->Data_Count++;
 			
@@ -587,6 +591,7 @@ template <typename Data_Type>  class Stream_Stats {
 			this->Max = 0;
 			this->Min = 0;
 			this->Average = 0;
+			this->Last = 0;
 			
 		};
 
@@ -631,6 +636,17 @@ template <typename Data_Type>  class Stream_Stats {
 
 			// Return Max
 			return(this->Max);
+
+		};
+
+		/**
+		 * @brief Get stream last value
+		 * @version 01.00.00
+		 */
+		float Get_Last(void) {
+
+			// Return Max
+			return(this->Last);
 
 		};
 
