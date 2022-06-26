@@ -83,7 +83,10 @@ Library calculate listed statistical parameters for data stream. User set the re
   <summary>Machine Learning Algorithm</summary>
 
 </br>
+
 This library will calculate slope of data according last n value. With these slope data system can learn sensor anomaly and make decision.
+
+</br>
 
 <img src="/Documents/Pressure_Regression.gif" width="800">
 
