@@ -3,7 +3,7 @@
 
 // Define Arduino Library
 #ifndef __Arduino__
-#include <Arduino.h>
+	#include <Arduino.h>
 #endif
 
 // Array Statistics
@@ -583,7 +583,7 @@ template <typename Data_Type>  class Stream_Stats {
 			// Clear Data Count
 			this->Data_Count = 0;
 
-			// Celar Stream Variables
+			// Clear Stream Variables
 			this->Max = 0;
 			this->Min = 0;
 			this->Average = 0;

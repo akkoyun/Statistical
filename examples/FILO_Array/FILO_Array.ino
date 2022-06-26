@@ -1,7 +1,6 @@
 // Include Statistal Library
 #include <Statistical.h>
 
-
 // Set Data
 float Data[5];
 
