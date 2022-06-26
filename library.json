@@ -1,8 +1,8 @@
 {
 	"name": "Statistical",
 	"version": "2.1.1",
-	"keywords": "Statistical, Max, Min, Average, Regression, Data, Sensor, Slope, Offset",
-	"description": "Function calculates statistical parameters of data stream and array",
+	"description": "Descriptive statistics such as mean, geometric mean, maximum, minimum, sample standard deviation and standard error, median, mode, coefficient of variation, and linear regression. Written for various data type arrays.",
+	"keywords": "Stats, Statistic, Average, Sum, Min, Max, Minimum, Maximum, Square Sum, Sq Sum, Arithmetic Average, Geometric Average, RMS Average, Extended RMSAverage, Quartile, IQR, Standard Deviation, Variance, Bubble Sort, Array, FILO, Offset, Slope, R2, Sensor, Math, Mathematical, Filter, Data, Stream, Static Array",
 	"authors":
 	{
 		"name": "Mehmet Gunce Akkoyun",
