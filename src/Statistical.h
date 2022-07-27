@@ -870,31 +870,6 @@ template <typename Data_Type_Magnitude, typename Data_Type_Angle>  class Vector_
 		}
 
 		/**
-		 * @brief Degree to Radian Convert Function
-		 * @version 01.00.00
-		 * @param _Angle Degree
-		 * @return float 
-		 */
-		float Degree2Radian(Data_Type_Angle _Angle) {
-
-			// Convert Degree to Radian
-			return (radians(_Angle));
-
-		}
-
-		/**
-		 * @brief Degree to Radian Convert Function
-		 * @version 01.00.00
-		 * @param _Angle Degree
-		 * @return float 
-		 */
-		float Radian2Degree(Data_Type_Angle _Angle) {
-
-			// Convert Radian to Degree
-			return (degrees(_Angle));
-		}
-
-		/**
 		 * @brief Set Vector Components
 		 * @version 01.00.00
 		 */
@@ -904,10 +879,10 @@ template <typename Data_Type_Magnitude, typename Data_Type_Angle>  class Vector_
 			for (size_t i = 0; i < this->Vector_Count; i++) {
 
 				// Calculate Vector X
-				this->Magnitude_X[i] = (float)this->Data_Magnitude[i] * cos(this->Degree2Radian(this->Data_Angle[i]));
+				this->Magnitude_X[i] = (float)this->Data_Magnitude[i] * cos(radians(this->Data_Angle[i]));
 
 				// Calculate Vector Y
-				this->Magnitude_Y[i] = (float)this->Data_Magnitude[i] * sin(this->Degree2Radian(this->Data_Angle[i]));
+				this->Magnitude_Y[i] = (float)this->Data_Magnitude[i] * sin(radians(this->Data_Angle[i]));
 
 			}
 
@@ -965,50 +940,14 @@ template <typename Data_Type_Magnitude, typename Data_Type_Angle>  class Vector_
 			// Calculate Result Vector Magnitude
 			this->Result.Magnitude = sqrt(sq(_Vector_Sum_X) + sq(_Vector_Sum_Y));
 
-			Serial.println("------------------");
-			Serial.print("SUM X     : "); Serial.println(_Vector_Sum_X);
-			Serial.print("SUM Y     : "); Serial.println(_Vector_Sum_Y);
-			Serial.print("Magnitude : "); Serial.println(this->Result.Magnitude);
-
 			// Calculate Result Vector Angle
-			_Angle = (Radian2Degree(atan(_Vector_Sum_Y / _Vector_Sum_X)));
-
-			Serial.print("Angle     : "); Serial.println(_Angle);
-			Serial.println("------------------");
+			_Angle = (degrees(atan(_Vector_Sum_Y / _Vector_Sum_X)));
 
 			// Handle Angle
-			if (_Vector_Sum_X > 0 and _Vector_Sum_Y > 0) {
-
-				Serial.println("Bölge : 1");
-
-				// Set Angle
-				this->Result.Angle = 90 - abs(_Angle);
-
-			}
-			if (_Vector_Sum_X < 0 and _Vector_Sum_Y > 0) {
-
-				Serial.println("Bölge : 2");
-
-				// Set Angle
-				this->Result.Angle = 360 + (abs(_Angle) - 90);
-
-			}
-			if (_Vector_Sum_X > 0 and _Vector_Sum_Y < 0) {
-
-				Serial.println("Bölge : 3");
-
-				// Set Angle
-				this->Result.Angle = 180 - (_Angle + 90);
-
-			}
-			if (_Vector_Sum_X < 0 and _Vector_Sum_Y < 0) {
-
-				Serial.println("Bölge : 4");
-
-				// Set Angle
-				this->Result.Angle = 270 - abs(_Angle);
-
-			}
+			if (_Vector_Sum_X > 0 and _Vector_Sum_Y > 0) this->Result.Angle = 90 - abs(_Angle);
+			if (_Vector_Sum_X < 0 and _Vector_Sum_Y > 0) this->Result.Angle = 360 + (abs(_Angle) - 90);
+			if (_Vector_Sum_X > 0 and _Vector_Sum_Y < 0) this->Result.Angle = 180 - (_Angle + 90);
+			if (_Vector_Sum_X < 0 and _Vector_Sum_Y < 0) this->Result.Angle = 270 - abs(_Angle);
 
 		}
 

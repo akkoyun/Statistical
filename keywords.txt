@@ -9,6 +9,7 @@
 Array_Stats						KEYWORD1
 Stream_Stats					KEYWORD1
 Linear_Regression				KEYWORD1
+Vector_Stats                    KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -41,6 +42,7 @@ Get_Max                         KEYWORD2
 Offset                          KEYWORD2
 Slope                           KEYWORD2
 R2                              KEYWORD2
+Vector_Sum                      KEYWORD2
 
 #######################################
 # Constants (LITERAL1)

@@ -1,8 +1,8 @@
 {
 	"name": "Statistical",
-	"version": "2.2.0",
-	"keywords": "Statistical, Max, Min, Average, Regression, Data, Sensor, Slope, Offset",
-	"description": "Function calculates statistical parameters of data stream and array",
+	"version": "2.2.1",
+	"keywords": "Statistical, Max, Min, Average, Regression, Data, Sensor, Slope, Offset, Vector",
+	"description": "Function calculates statistical parameters of data stream, array, regression and vectors",
 	"authors":
 	{
 		"name": "Mehmet Gunce Akkoyun",
@@ -49,6 +49,13 @@
 			"base": "examples/Stream/",
 			"files": [
 				"Stream.ino"
+			]
+		},
+		{
+			"name": "Vector",
+			"base": "examples/Vector/",
+			"files": [
+				"Vector.ino"
 			]
 		}
 	]
