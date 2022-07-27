@@ -3,7 +3,7 @@
 
 // Define Arduino Library
 #ifndef __Arduino__
-#include <Arduino.h>
+	#include <Arduino.h>
 #endif
 
 // Array Statistics
@@ -825,6 +825,190 @@ template <typename Data_Type_X, typename Data_Type_Y> class Linear_Regression {
 
 			// End Function
 			return(_R2);
+
+		}
+
+};
+
+// Array Statistics
+template <typename Data_Type_Magnitude, typename Data_Type_Angle>  class Vector_Stats {
+
+	protected:
+		
+		// Declare Vector Magnitude
+		Data_Type_Magnitude * Data_Magnitude;
+
+		// Declare Vector Angle
+		Data_Type_Angle * Data_Angle;
+
+		// Declare Vector Count
+		size_t Vector_Count;
+
+		// Declare Vector Magnitude X
+		Data_Type_Magnitude Magnitude_X[3];
+
+		// Declare Vector Magnitude Y
+		Data_Type_Magnitude Magnitude_Y[3];
+
+		/**
+		 * @brief Set array size
+		 * @version 01.00.00
+		 * @param _Size Array size
+		 */	
+		bool Set_Array_Size(const size_t _Size) {
+
+			// Control for Max Filo Size
+			if (_Size == 3) return(false);
+
+			// Resize Array
+			realloc(this->Magnitude_X, _Size);
+			realloc(this->Magnitude_Y, _Size);
+
+			// End Function
+			return(true);
+
+		}
+
+		/**
+		 * @brief Degree to Radian Convert Function
+		 * @version 01.00.00
+		 * @param _Angle Degree
+		 * @return float 
+		 */
+		float Degree2Radian(Data_Type_Angle _Angle) {
+
+			// Convert Degree to Radian
+			return (radians(_Angle));
+
+		}
+
+		/**
+		 * @brief Degree to Radian Convert Function
+		 * @version 01.00.00
+		 * @param _Angle Degree
+		 * @return float 
+		 */
+		float Radian2Degree(Data_Type_Angle _Angle) {
+
+			// Convert Radian to Degree
+			return (degrees(_Angle));
+		}
+
+		/**
+		 * @brief Set Vector Components
+		 * @version 01.00.00
+		 */
+		void Set_Vector_Components(void) {
+
+			// Calculate Vector Parameters
+			for (size_t i = 0; i < this->Vector_Count; i++) {
+
+				// Calculate Vector X
+				this->Magnitude_X[i] = (float)this->Data_Magnitude[i] * cos(this->Degree2Radian(this->Data_Angle[i]));
+
+				// Calculate Vector Y
+				this->Magnitude_Y[i] = (float)this->Data_Magnitude[i] * sin(this->Degree2Radian(this->Data_Angle[i]));
+
+			}
+
+		}
+
+	public:
+
+		// Vector Sum Struct
+		struct Vector_Sum {
+
+			// Vector Total Magnitude
+			float Magnitude;
+
+			// Vector Total Angle
+			float Angle;
+
+		} Result;
+
+		/**
+		 * @brief Function constructor
+		 * @version 01.00.00
+		 * @param _Data Data array
+		 * @param _Data_Count Array size
+		 */
+		Vector_Stats(Data_Type_Magnitude * _Data_Magnitude, Data_Type_Angle * _Data_Angle, size_t _Vector_Count) : Data_Magnitude(_Data_Magnitude), Data_Angle(_Data_Angle), Vector_Count(_Vector_Count) {
+
+		}
+
+		/**
+		 * @brief Vector add function
+		 * @version 01.00.00
+		 */
+		void Vector_Sum(void) {
+
+			// Declare Vector Sum Variables
+			float _Vector_Sum_X = 0;
+			float _Vector_Sum_Y = 0;
+			float _Angle = 0;
+
+			// ReSize Arrays
+			this->Set_Array_Size(this->Vector_Count);
+
+			// Calculate Vector Parameters
+			this->Set_Vector_Components();
+
+			// Calculate Vector Parameters Sum
+			for (size_t i = 0; i < this->Vector_Count; i++) {
+
+				// Calculate Sums
+				_Vector_Sum_X += this->Magnitude_X[i];
+				_Vector_Sum_Y += this->Magnitude_Y[i];
+
+			}
+
+			// Calculate Result Vector Magnitude
+			this->Result.Magnitude = sqrt(sq(_Vector_Sum_X) + sq(_Vector_Sum_Y));
+
+			Serial.println("------------------");
+			Serial.print("SUM X     : "); Serial.println(_Vector_Sum_X);
+			Serial.print("SUM Y     : "); Serial.println(_Vector_Sum_Y);
+			Serial.print("Magnitude : "); Serial.println(this->Result.Magnitude);
+
+			// Calculate Result Vector Angle
+			_Angle = (Radian2Degree(atan(_Vector_Sum_Y / _Vector_Sum_X)));
+
+			Serial.print("Angle     : "); Serial.println(_Angle);
+			Serial.println("------------------");
+
+			// Handle Angle
+			if (_Vector_Sum_X > 0 and _Vector_Sum_Y > 0) {
+
+				Serial.println("Bölge : 1");
+
+				// Set Angle
+				this->Result.Angle = 90 - abs(_Angle);
+
+			}
+			if (_Vector_Sum_X < 0 and _Vector_Sum_Y > 0) {
+
+				Serial.println("Bölge : 2");
+
+				// Set Angle
+				this->Result.Angle = 360 + (abs(_Angle) - 90);
+
+			}
+			if (_Vector_Sum_X > 0 and _Vector_Sum_Y < 0) {
+
+				Serial.println("Bölge : 3");
+
+				// Set Angle
+				this->Result.Angle = 180 - (_Angle + 90);
+
+			}
+			if (_Vector_Sum_X < 0 and _Vector_Sum_Y < 0) {
+
+				Serial.println("Bölge : 4");
+
+				// Set Angle
+				this->Result.Angle = 270 - abs(_Angle);
+
+			}
 
 		}
 
