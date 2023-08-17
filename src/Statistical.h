@@ -204,7 +204,7 @@
 				}
 
 				// Control for Valid Data Count
-				if (_Valid_Data_Count == 0) return(0
+				if (_Valid_Data_Count == 0) return(0);
 
 				// Calculate Sigma Average
 				Data_Type _Sigma_Avg = _Sum / _Valid_Data_Count;			
