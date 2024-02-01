@@ -458,8 +458,19 @@
 				// Control for Max Filo Size
 				if (_FILO_Size > 50) return(false);
 
-				// Resize Array
-				realloc(this->Data, _FILO_Size);
+				// ReSize Arrays
+				void* tempData = realloc(this->Data, _FILO_Size * sizeof(*this->Data));
+
+				// Control for Realloc
+				if (tempData == NULL) {
+
+					// End Function
+					return(false);
+
+				}
+
+				// Set New Array
+				this->Data = tempData;
 
 				// Set Array Size Variable
 				this->Data_Count = _FILO_Size;
@@ -819,8 +830,36 @@
 				if (_Size == 3) return(false);
 
 				// Resize Array
-				realloc(this->Magnitude_X, _Size);
-				realloc(this->Magnitude_Y, _Size);
+				void* _New_Magnitude_X = realloc(this->Magnitude_X, _Size);
+
+				// Control for Realloc
+				if (_New_Magnitude_X != NULL) {
+
+					// Set New Array
+					this->Magnitude_X = _New_Magnitude_X;
+
+				} else {
+					
+					// End Function
+					return(false);
+
+				}
+
+				// Resize Array
+				void* _New_Magnitude_Y = realloc(this->Magnitude_Y, _Size);
+
+				// Control for Realloc
+				if (_New_Magnitude_Y != NULL) {
+
+					// Set New Array
+					this->Magnitude_Y = _New_Magnitude_Y;
+
+				} else {
+
+					// End Function
+					return(false);
+
+				}
 
 				// End Function
 				return(true);

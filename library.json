@@ -1,6 +1,6 @@
 {
 	"name": "Statistical",
-	"version": "2.4.1",
+	"version": "2.4.2",
 	"keywords": "Statistical, Max, Min, Average, Regression, Data, Sensor, Slope, Offset",
 	"description": "Function calculates statistical parameters of data stream and array",
 	"authors":
