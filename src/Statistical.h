@@ -392,7 +392,6 @@
 
 				// Declare Buffer Variables
 				size_t _New_n;
-				Data_Type _Temp = 0;
 
 				// Sort Array
 				do {
@@ -930,6 +929,10 @@
 			 * @param _Data_Count Array size
 			 */
 			Vector_Stats(Data_Type_Magnitude * _Data_Magnitude, Data_Type_Angle * _Data_Angle, size_t _Vector_Count) : Data_Magnitude(_Data_Magnitude), Data_Angle(_Data_Angle), Vector_Count(_Vector_Count) {
+
+				// Initialize Result
+				this->Result.Magnitude = 0;
+				this->Result.Angle = 0;
 
 			}
 
