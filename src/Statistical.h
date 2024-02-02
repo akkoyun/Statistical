@@ -392,6 +392,7 @@
 
 				// Declare Buffer Variables
 				size_t _New_n;
+				Data_Type _Temp = 0;
 
 				// Sort Array
 				do {
