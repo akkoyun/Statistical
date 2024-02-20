@@ -1,10 +1,13 @@
 #ifndef __Statistical__
 #define __Statistical__
 
-	// Define Arduino Library
-	#ifndef __Arduino__
+	// Include Arduino Library
+	#ifndef Arduino_h
 		#include <Arduino.h>
 	#endif
+
+	// Include Definitions
+	#include "Definitions.h"
 
 	// Array Statistics
 	template <typename Data_Type>  class Array_Stats {
@@ -15,25 +18,12 @@
 			Data_Type * Data;
 
 			// Declare Data Count
-			size_t Data_Count;
+			uint16_t Data_Count;
 
 		public:
 
-			// Define Average Type
-			#define _Arithmetic_Average_		1
-			#define _Geometric_Average_			2
-			#define _RMS_Average_				3
-			#define _Ext_RMS_Average_			4
-			#define _Sigma_Average_				5
-
-			// Define Sigma Type
-			#define _1_Sigma_					1
-			#define _2_Sigma_					2
-			#define _3_Sigma_					3
-			#define _4_Sigma_					4
-
 			// Function constructor
-			Array_Stats(Data_Type * _Data, size_t _Data_Count) : Data(_Data), Data_Count(_Data_Count) {
+			Array_Stats(Data_Type * _Data, uint16_t _Data_Count) : Data(_Data), Data_Count(_Data_Count) {
 
 			}
 
@@ -57,7 +47,7 @@
 			}
 
 			// Get data array size
-			size_t Size(void) {
+			uint16_t Size(void) {
 
 				// End Function
 				return(this->Data_Count);
@@ -254,57 +244,6 @@
 
 			}
 
-			// Calculate the array quartile.
-			float Quartile(const uint8_t _Q) {
-
-				// Sort Array
-				Bubble_Sort();
-
-				// Declare Variable
-				double _Quartile = 0;
-				double _Multiplier = 0;
-
-				// Decide Q Multiplier
-				if (_Q == 1) _Multiplier = 0.25;
-				if (_Q == 2) _Multiplier = 0.50;
-				if (_Q == 3) _Multiplier = 0.75;
-
-				// Calculate Quartile Position
-				double _Position = ((this->Data_Count + 1) * _Multiplier);
-
-				// Calculate Quartile
-				_Quartile = this->Data[(int)_Position - 1] + ((_Position - (int)_Position) * (this->Data[(int)_Position] - this->Data[(int)_Position - 1]));
-
-				// Handle Calculation
-				if (isnan(_Quartile)) _Quartile = 0;
-				if (isinf(_Quartile)) _Quartile = 0;
-
-				// End Function
-				return(_Quartile);
-
-			}
-
-			// Calculate the array IQR.
-			float IQR(void) {
-
-				// Calculate Q1
-				double _Q1 = Quartile(1);
-
-				// Calculate Q3
-				double _Q3 = Quartile(3);
-
-				// Calculate IQR
-				double _IQR = _Q3 - _Q1;
-
-				// Handle Calculation
-				if (isnan(_IQR)) _IQR = 0;
-				if (isinf(_IQR)) _IQR = 0;
-
-				// End Function
-				return(_IQR);
-
-			}
-
 			// Calculate the array standard deviation.
 			float Standard_Deviation(void) {
 
@@ -387,110 +326,95 @@
 
 			}
 
-			// Sort the array from min to max.
-			void Bubble_Sort(void) {
+			// Bubble Sort Function
+			void Bubble_Sort(Data_Type* data, uint16_t count) {
 
-				// Declare Buffer Variables
-				size_t _New_n;
-				Data_Type _Temp = 0;
-
-				// Sort Array
-				do {
-
-					_New_n = 1;
-
-					for (size_t i = 1; i < this->Data_Count; i++) {
-
-						if(this->Data[i - 1]>this->Data[i]){
-							
-							_Temp = this->Data[i];
-							
-							this->Data[i]=this->Data[i - 1];
-							
-							this->Data[i - 1] = _Temp;
-							
-							_New_n = i;
-
-						} //end if
-
+				// Bubble Sort
+				for (uint16_t i = 0; i < count - 1; i++) {
+					for (uint16_t j = 0; j < count - i - 1; j++) {
+						if (data[j] > data[j + 1]) {
+							Data_Type temp = data[j];
+							data[j] = data[j + 1];
+							data[j + 1] = temp;
+						}
 					}
-
-				} while (_New_n > 1);
-
-			}
-
-			// Set Array FILO
-			void FILO(float _Array[][2], uint16_t _Data_Count, float _Data_X, float _Data_Y) {
-		
-				// Redesign Array
-				for (uint16_t i = 0; i < _Data_Count-1; i++) {
-				
-					_Array[i][0] = _Array[i+1][0];
-					_Array[i][1] = _Array[i+1][1];
-				
 				}
-				
-				// Add New Data
-				_Array[_Data_Count-1][0] = _Data_X;
-				_Array[_Data_Count-1][1] = _Data_Y;
-
 			}
 
-			// Print Full Array
-			void Array(void) {
+			// Median Function
+			float Median(void) {
 
-				// Loop Data Count
-				for (uint8_t i = 0; i < this->Data_Count; i++) {
+				// Declare Variable
+				Data_Type sortedData[Data_Count];
+
+				// Copy and Sort Data
+				memcpy(sortedData, Data, Data_Count * sizeof(Data_Type));
+
+				// Bubble Sort
+				Bubble_Sort(sortedData, Data_Count);
+
+				// Calculate Median
+				if (Data_Count % 2 == 0) {
 					
-					// Print Array
-					Serial.print(F("[")); Serial.print(this->Data[i]); Serial.print(F("] "));
-					
-				} 
-				
-				// End Line
-				Serial.println(F(""));
+					// Return Median
+					return (sortedData[Data_Count / 2 - 1] + sortedData[Data_Count / 2]) / 2.0;
 
-			}
+				} else {
 
-			// Set FILO array size
-			bool Set_FILO_Size(const size_t _FILO_Size) {
-
-				// Control for Max Filo Size
-				if (_FILO_Size > 50) return(false);
-
-				// ReSize Arrays
-				void* tempData = realloc(this->Data, _FILO_Size * sizeof(*this->Data));
-
-				// Control for Realloc
-				if (tempData == NULL) {
-
-					// End Function
-					return(false);
+					// Return Median
+					return sortedData[Data_Count / 2];
 
 				}
 
-				// Set New Array
-				this->Data = tempData;
+			}
 
-				// Set Array Size Variable
-				this->Data_Count = _FILO_Size;
+			// Quartile Function
+			float Q1(void) {
 
-				// Reset Array
-				for (size_t i = 0; i < this->Data_Count; i++) this->Data[i] = 0;
+				// Declare Variable
+				Data_Type sortedData[Data_Count];
 
-				// End Function
-				return(true);
+				// Copy and Sort Data
+				memcpy(sortedData, Data, Data_Count * sizeof(Data_Type));
+
+				// Bubble Sort
+				Bubble_Sort(sortedData, Data_Count);
+
+				// Calculate Q1
+				uint16_t midIndex = Data_Count / 2;
+				if (Data_Count % 2 == 0) midIndex--;
+
+				// Return Q1
+				return Median(sortedData, midIndex + 1);
 
 			}
 
-			// FILO data add to array
-			void FILO_Add_Data(const Data_Type _Data) {
+			// Quartile Function
+			float Q3(void) {
 
-				// Redesign Array
-				for (size_t i = 0; i < this->Data_Count; i++) this->Data[i] = this->Data[i + 1];
+				// Declare Variable
+				Data_Type sortedData[Data_Count];
+
+				// Copy and Sort Data
+				memcpy(sortedData, Data, Data_Count * sizeof(Data_Type));
+
+				// Bubble Sort
+				sortData(sortedData, Data_Count);
+
+				// Calculate Q3
+				uint16_t startIndex = Data_Count / 2;
+				if (Data_Count % 2 != 0) startIndex++;
+
+				// Return Q3
+				return Median(&sortedData[startIndex], Data_Count - startIndex);
+
+			}
+
+			// IQR Function
+			float IQR() {
 				
-				// Add New Data
-				this->Data[this->Data_Count - 1] = _Data;
+				// Return IQR
+				return Q3() - Q1();
 
 			}
 
@@ -621,398 +545,304 @@
 
 	};
 
-	// Linear Regression Statistics
-	template <typename Data_Type_X, typename Data_Type_Y> class Linear_Regression {
+	// XY Data Class
+	template<typename X_Data_Type, typename Y_Data_Type> class Data_XY {
 
-		protected:
+		// Public Context
+		public:
 
-			// Declare Data Array X
-			Data_Type_X * Data_X;
+			// Declare X Variable
+			X_Data_Type _Data_X;
 
-			// Declare Data Array Y
-			Data_Type_Y * Data_Y;
+			// Declare Y Variable
+			Y_Data_Type _Data_Y;
 
-			// Declare Data Count
-			size_t Data_Count;
+			// Constructor
+			Data_XY() : _Data_X(), _Data_Y() {}
+			Data_XY(X_Data_Type _X, Y_Data_Type _Y) : _Data_X(_X), _Data_Y(_Y) {}
+
+	};
+
+	// Dynamic Data Class
+	template<typename X_Data_Type, typename Y_Data_Type> class Dynamic_Data_2D {
+
+		// Public Context
+		private:
+
+			// Declare Data Container
+			Data_XY<X_Data_Type, Y_Data_Type>* Data_Container;
+			
+			// Declare Capacity
+			uint16_t Capacity;
+			
+			// Declare Current Size
+			uint16_t Current_Size;
+
+			// Resize Function
+			void Resize() {
+
+				// Check Capacity
+				Capacity = (Capacity == 0) ? 1 : Capacity * 2;
+
+				// Create New Data
+				Data_XY<X_Data_Type, Y_Data_Type>* _New_Data = new Data_XY<X_Data_Type, Y_Data_Type>[Capacity];
+
+				// Copy Data
+				for (uint16_t i = 0; i < Current_Size; i++) _New_Data[i] = Data_Container[i];
+
+				// Delete Old Data
+				delete[] Data_Container;
+
+				// Set New Data
+				Data_Container = _New_Data;
+
+			}
 
 		public:
 
-			/**
-			 * @brief Function constructor
-			 * @version 01.00.00
-			 */
-			Linear_Regression(Data_Type_X * _Data_X, Data_Type_Y * _Data_Y, size_t _Data_Count) : Data_X(_Data_X), Data_Y(_Data_Y), Data_Count(_Data_Count)  {
+			// Constructor
+			Dynamic_Data_2D() : Data_Container(nullptr), Capacity(0), Current_Size(0) {}
+
+			// Destructor
+			~Dynamic_Data_2D() {
+
+				// Delete Data
+				delete[] Data_Container;
+
+				// Reset pointers and counters
+				Data_Container = nullptr;
+				Capacity = 0;
+				Current_Size = 0;
 
 			}
 
-			/**
-			 * @brief Calculate Regression Offset
-			 * @version 01.00.00
-			 * @return float Offset Value
-			 */
-			float Offset(void) {
+			// Add Function
+			void Add(X_Data_Type _X, Y_Data_Type _Y) {
 
-				// Declare X Array
-				Array_Stats<Data_Type_X> Data_Array_X(Data_X, Data_Count);
+				// Check Capacity
+				if (Current_Size == Capacity) Resize();
 
-				// Declare Y Array
-				Array_Stats<Data_Type_Y> Data_Array_Y(Data_Y, Data_Count);
+				// Add new data
+				Data_Container[Current_Size++] = Data_XY<X_Data_Type, Y_Data_Type>(_X, _Y);
+
+			}
+
+			// Get Function
+			Y_Data_Type* Get(X_Data_Type _X) {
+
+				// Search for X
+				for (uint16_t i = 0; i < Current_Size; i++) {
+
+					// Check X
+					if (Data_Container[i]._Data_X == _X) return &Data_Container[i]._Data_Y;
+
+				}
+
+				// Return Null
+				return nullptr;
+			}
+
+			// Get X Function
+			X_Data_Type GetX(uint16_t index) {
+
+				// Check Index
+				if (index < Current_Size) return Data_Container[index]._Data_X;
+
+				// Return Null
+				return X_Data_Type();
+
+			}
+
+			// Get Y Function
+			Y_Data_Type GetY(uint16_t index) {
+
+				// Check Index
+				if (index < Current_Size) return Data_Container[index]._Data_Y;
+
+				// Return Null
+				return Y_Data_Type();
+
+			}
+
+			// Size Function
+			uint16_t Size() const {
+
+				// Return Size
+				return Current_Size;
+
+			}
+
+			// Clear Function
+			void Clear() {
+
+				// Delete existing data
+				delete[] Data_Container;
+
+				// Reset pointers and counters
+				Data_Container = nullptr;
+				Capacity = 0;
+				Current_Size = 0;
+
+			}
+
+	};
+
+	// Linear Regression
+	template<typename X_Data_Type, typename Y_Data_Type> class Regression {
+
+		// Private Context
+		private:
+
+			// Declare Data Container
+			Dynamic_Data_2D<X_Data_Type, Y_Data_Type> dataContainer;
+
+		// Public Context
+		public:
+
+			// Add Function
+			void Add(X_Data_Type x, Y_Data_Type y) {
+				
+				// Add Data
+				dataContainer.Add(x, y);
+
+			}
+
+			// Calculate Function
+			double Slope(void) {
 
 				// Declare Variables
-				float _Sum_X = 0;
-				float _Sum_Y = 0;
-				float _Sum_X2 = 0;
-				float _Sum_XY = 0;
-				float _b0 = 0;
-
-				// Calculate Sum X
-				_Sum_X = Data_Array_X.Sum();
-
-				// Calculate Sum Y
-				_Sum_Y = Data_Array_Y.Sum();
-
-				// Calculate Sum X2
-				_Sum_X2 = Data_Array_X.Sq_Sum();
-
-				// Calculate Sum XY
-				for (size_t i = 0; i < Data_Count; i++) _Sum_XY += Data_X[i] * Data_Y[i];
+				double sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
+				uint16_t n = dataContainer.Size();
 
 				// Calculate Slope
-				_b0 = ((_Sum_X2 * _Sum_Y) - (_Sum_X * _Sum_XY)) / ((Data_Count * _Sum_X2) - (_Sum_X * _Sum_X));
+				for (uint16_t i = 0; i < n; i++) {
+					double x = dataContainer.GetX(i);
+					double y = dataContainer.GetY(i);
+					sumX += x;
+					sumY += y;
+					sumXY += x * y;
+					sumX2 += x * x;
+				}
 
-				// End Function
-				return(_b0);
+				// Return Slope
+				return (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
 
 			}
 
-			/**
-			 * @brief Calculate Regression Slope
-			 * @version 01.00.00
-			 * @return float Slope Value
-			 */
-			float Slope(void) {
-
-				// Declare X Array
-				Array_Stats<Data_Type_X> Data_Array_X(Data_X, Data_Count);
-
-				// Declare Y Array
-				Array_Stats<Data_Type_Y> Data_Array_Y(Data_Y, Data_Count);
+			// Calculate Function
+			double Offset(void) {
 
 				// Declare Variables
-				float _Sum_X = 0;
-				float _Sum_Y = 0;
-				float _Sum_XY = 0;
-				float _Sum_X2 = 0;
-				float _b1 = 0;
+				double sumX = 0, sumY = 0;
+				uint16_t n = dataContainer.Size();
 
-				// Calculate Sum X
-				_Sum_X = Data_Array_X.Sum();
+				// Calculate Offset
+				for (uint16_t i = 0; i < n; i++) {
+					double x = dataContainer.GetX(i);
+					double y = dataContainer.GetY(i);
+					sumX += x;
+					sumY += y;
+				}
 
-				// Calculate Sum Y
-				_Sum_Y = Data_Array_Y.Sum();
+				// Return Offset
+				double meanX = sumX / n;
+				double meanY = sumY / n;
 
-				// Calculate Sum X2
-				_Sum_X2 = Data_Array_X.Sq_Sum();
-
-				// Calculate Sum XY
-				for (size_t i = 0; i < Data_Count; i++) _Sum_XY += Data_X[i] * Data_Y[i];
-
-				// Calculate Slope
-				_b1 = ((Data_Count * _Sum_XY) - (_Sum_X * _Sum_Y)) / ((Data_Count * _Sum_X2) - (_Sum_X * _Sum_X));
-
-				// End Function
-				return(_b1);
+				// Return Offset
+				return meanY - Slope() * meanX;
 
 			}
-			
-			/**
-			 * @brief Calculate Regression R2
-			 * @version 01.00.00
-			 * @return float R2 Value
-			 */
-			float R2(void) {
 
-				// Declare X Array
-				Array_Stats<Data_Type_X> Data_Array_X(Data_X, Data_Count);
-
-				// Declare Y Array
-				Array_Stats<Data_Type_Y> Data_Array_Y(Data_Y, Data_Count);
+			// Calculate Function
+			double R2() {
 
 				// Declare Variables
-				float _Mean_X = 0;
-				float _Mean_Y = 0;
-				float _Sum_x2 = 0;
-				float _Sum_y2 = 0;
-				float _Sum_xy = 0;
-				float _x[Data_Count]; // x = X - Xavg
-				float _y[Data_Count]; // y = Y - Yavg
-				float _R2 = 0;
-
-				// Calculate Mean X
-				_Mean_X = Data_Array_X.Arithmetic_Average();
-
-				// Calculate Mean Y
-				_Mean_Y = Data_Array_Y.Arithmetic_Average();
-
-				// Set x and y Array
-				for (size_t i = 0; i < Data_Count; i++) {
-
-					// Set x
-					_x[i] = Data_X[i] - _Mean_X;
-
-					// Set y
-					_y[i] = Data_Y[i] - _Mean_Y;
-
-				}
-
-				// Calculate Sum xy
-				for (size_t i = 0; i < Data_Count; i++) {
-
-					// Set Sum xy
-					_Sum_xy += _x[i] * _y[i];
-
-				}
-
-				// Calculate Sum x2
-				for (size_t i = 0; i < Data_Count; i++) {
-
-					// Set Sum x2
-					_Sum_x2 += _x[i] * _x[i];
-
-				}
-
-				// Calculate Sum y2
-				for (size_t i = 0; i < Data_Count; i++) {
-
-					// Set Sum y2
-					_Sum_y2 += _y[i] * _y[i];
-
-				}
+				double sumY = 0, sumY2 = 0, sumPredictedY2 = 0;
+				uint16_t n = dataContainer.Size();
+				double slope = Slope();
+				double offset = Offset();
 
 				// Calculate R2
-				_R2 = (_Sum_xy * _Sum_xy) / (_Sum_x2 * _Sum_y2);
+				for (uint16_t i = 0; i < n; i++) {
 
-				// End Function
-				return(_R2);
+					// Calculate R2
+					double y = dataContainer.GetY(i);
+					sumY += y;
+					sumY2 += y * y;
+					double predictedY = offset + slope * dataContainer.GetX(i);
+					sumPredictedY2 += (predictedY - y) * (predictedY - y);
+
+				}
+
+				// Return R2
+				double meanY = sumY / n;
+				double totalVariance = sumY2 - n * meanY * meanY;
+				double unexplainedVariance = sumPredictedY2;
+
+				// Return R2
+				return 1 - (unexplainedVariance / totalVariance);
 
 			}
 
 	};
 
-	// Array Statistics
-	template <typename Data_Type_Magnitude, typename Data_Type_Angle>  class Vector_Stats {
+	// Vector Statistics
+	class Vector_Stats {
 
-		protected:
-			
-			// Declare Vector Magnitude
-			Data_Type_Magnitude * Data_Magnitude;
+		// Private Context	
+		private:
 
-			// Declare Vector Angle
-			Data_Type_Angle * Data_Angle;
+			// Declare Variables
+			double sumX = 0;
+			double sumY = 0;
 
-			// Declare Vector Count
-			size_t Vector_Count;
-
-			// Declare Vector Magnitude X
-			Data_Type_Magnitude Magnitude_X[3];
-
-			// Declare Vector Magnitude Y
-			Data_Type_Magnitude Magnitude_Y[3];
-
-			/**
-			 * @brief Set array size
-			 * @version 01.00.00
-			 * @param _Size Array size
-			 */	
-			bool Set_Array_Size(const size_t _Size) {
-
-				// Control for Max Filo Size
-				if (_Size == 3) return(false);
-
-				// Resize Array
-				void* _New_Magnitude_X = realloc(this->Magnitude_X, _Size);
-
-				// Control for Realloc
-				if (_New_Magnitude_X != NULL) {
-
-					// Set New Array
-					this->Magnitude_X = _New_Magnitude_X;
-
-				} else {
-					
-					// End Function
-					return(false);
-
-				}
-
-				// Resize Array
-				void* _New_Magnitude_Y = realloc(this->Magnitude_Y, _Size);
-
-				// Control for Realloc
-				if (_New_Magnitude_Y != NULL) {
-
-					// Set New Array
-					this->Magnitude_Y = _New_Magnitude_Y;
-
-				} else {
-
-					// End Function
-					return(false);
-
-				}
-
-				// End Function
-				return(true);
-
-			}
-
-			/**
-			 * @brief Degree to Radian Convert Function
-			 * @version 01.00.00
-			 * @param _Angle Degree
-			 * @return float 
-			 */
-			float Degree2Radian(Data_Type_Angle _Angle) {
-
-				// Convert Degree to Radian
-				return (radians(_Angle));
-
-			}
-
-			/**
-			 * @brief Degree to Radian Convert Function
-			 * @version 01.00.00
-			 * @param _Angle Degree
-			 * @return float 
-			 */
-			float Radian2Degree(Data_Type_Angle _Angle) {
-
-				// Convert Radian to Degree
-				return (degrees(_Angle));
-			}
-
-			/**
-			 * @brief Set Vector Components
-			 * @version 01.00.00
-			 */
-			void Set_Vector_Components(void) {
-
-				// Calculate Vector Parameters
-				for (size_t i = 0; i < this->Vector_Count; i++) {
-
-					// Calculate Vector X
-					this->Magnitude_X[i] = (float)this->Data_Magnitude[i] * cos(this->Degree2Radian(this->Data_Angle[i]));
-
-					// Calculate Vector Y
-					this->Magnitude_Y[i] = (float)this->Data_Magnitude[i] * sin(this->Degree2Radian(this->Data_Angle[i]));
-
-				}
-
-			}
-
+		// Public Context
 		public:
 
-			// Vector Sum Struct
-			struct Vector_Sum {
+			// Add Vector Function
+			void Add(double magnitude, double angle) {
 
-				// Vector Total Magnitude
-				float Magnitude;
+				// Convert angle to radians
+				double angleRad = radians(angle);
 
-				// Vector Total Angle
-				float Angle;
-
-			} Result;
-
-			/**
-			 * @brief Function constructor
-			 * @version 01.00.00
-			 * @param _Data Data array
-			 * @param _Data_Count Array size
-			 */
-			Vector_Stats(Data_Type_Magnitude * _Data_Magnitude, Data_Type_Angle * _Data_Angle, size_t _Vector_Count) : Data_Magnitude(_Data_Magnitude), Data_Angle(_Data_Angle), Vector_Count(_Vector_Count) {
-
-				// Initialize Result
-				this->Result.Magnitude = 0;
-				this->Result.Angle = 0;
+				// Add to sum
+				sumX += magnitude * cos(angleRad);
+				sumY += magnitude * sin(angleRad);
 
 			}
 
-			/**
-			 * @brief Vector add function
-			 * @version 01.00.00
-			 */
-			void Vector_Sum(void) {
-
-				// Declare Vector Sum Variables
-				float _Vector_Sum_X = 0;
-				float _Vector_Sum_Y = 0;
-				float _Angle = 0;
-
-				// ReSize Arrays
-				this->Set_Array_Size(this->Vector_Count);
-
-				// Calculate Vector Parameters
-				this->Set_Vector_Components();
-
-				// Calculate Vector Parameters Sum
-				for (size_t i = 0; i < this->Vector_Count; i++) {
-
-					// Calculate Sums
-					_Vector_Sum_X += this->Magnitude_X[i];
-					_Vector_Sum_Y += this->Magnitude_Y[i];
-
-				}
-
-				// Calculate Result Vector Magnitude
-				this->Result.Magnitude = sqrt(sq(_Vector_Sum_X) + sq(_Vector_Sum_Y));
-
-				Serial.println("------------------");
-				Serial.print("SUM X     : "); Serial.println(_Vector_Sum_X);
-				Serial.print("SUM Y     : "); Serial.println(_Vector_Sum_Y);
-				Serial.print("Magnitude : "); Serial.println(this->Result.Magnitude);
-
-				// Calculate Result Vector Angle
-				_Angle = (Radian2Degree(atan(_Vector_Sum_Y / _Vector_Sum_X)));
-
-				Serial.print("Angle     : "); Serial.println(_Angle);
-				Serial.println("------------------");
-
-				// Handle Angle
-				if (_Vector_Sum_X > 0 and _Vector_Sum_Y > 0) {
-
-					Serial.println("Bölge : 1");
-
-					// Set Angle
-					this->Result.Angle = 90 - abs(_Angle);
-
-				}
-				if (_Vector_Sum_X < 0 and _Vector_Sum_Y > 0) {
-
-					Serial.println("Bölge : 2");
-
-					// Set Angle
-					this->Result.Angle = 360 + (abs(_Angle) - 90);
-
-				}
-				if (_Vector_Sum_X > 0 and _Vector_Sum_Y < 0) {
-
-					Serial.println("Bölge : 3");
-
-					// Set Angle
-					this->Result.Angle = 180 - (_Angle + 90);
-
-				}
-				if (_Vector_Sum_X < 0 and _Vector_Sum_Y < 0) {
-
-					Serial.println("Bölge : 4");
-
-					// Set Angle
-					this->Result.Angle = 270 - abs(_Angle);
-
-				}
+			// Get X Magnitude Function
+			double Get_X_Magnitude(void) {
+				
+				// Return X Magnitude
+				return sumX;
 
 			}
 
-	};
+			// Get Y Magnitude Function
+			double Get_Y_Magnitude(void) {
+				
+				// Return Y Magnitude
+				return sumY;
+
+			}
+
+			// Get Total Magnitude Function
+			double Total_Magnitude(void) {
+				
+				// Return Total Magnitude
+				return sqrt(sumX * sumX + sumY * sumY);
+
+			}
+
+			// Get Total Angle Function
+			double Total_Angle(void) {
+				
+				// Return Total Angle
+				return degrees(atan2(sumY, sumX));
+
+			}
+
+		};
 
 #endif /* defined(__Statistical__) */
