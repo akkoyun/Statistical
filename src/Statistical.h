@@ -372,20 +372,19 @@
 			float Q1(void) {
 
 				// Declare Variable
-				Data_Type sortedData[Data_Count];
-
+				Data_Type temp[Data_Count];
+				
 				// Copy and Sort Data
-				memcpy(sortedData, Data, Data_Count * sizeof(Data_Type));
+				memcpy(temp, Data, Data_Count * sizeof(Data_Type));
 
 				// Bubble Sort
-				Bubble_Sort(sortedData, Data_Count);
+				Bubble_Sort(temp, Data_Count);
 
 				// Calculate Q1
-				uint16_t midIndex = Data_Count / 2;
-				if (Data_Count % 2 == 0) midIndex--;
+				size_t midIndex = Data_Count / 4;
 
 				// Return Q1
-				return Median(sortedData, midIndex + 1);
+				return temp[midIndex];
 
 			}
 
@@ -393,20 +392,19 @@
 			float Q3(void) {
 
 				// Declare Variable
-				Data_Type sortedData[Data_Count];
-
+				Data_Type temp[Data_Count];
+				
 				// Copy and Sort Data
-				memcpy(sortedData, Data, Data_Count * sizeof(Data_Type));
+				memcpy(temp, Data, Data_Count * sizeof(Data_Type));
 
 				// Bubble Sort
-				sortData(sortedData, Data_Count);
+				Bubble_Sort(temp, Data_Count);
 
-				// Calculate Q3
-				uint16_t startIndex = Data_Count / 2;
-				if (Data_Count % 2 != 0) startIndex++;
+				// Calculate Q1
+				size_t midIndex = 3 * Data_Count / 4;
 
-				// Return Q3
-				return Median(&sortedData[startIndex], Data_Count - startIndex);
+				// Return Q1
+				return temp[midIndex];
 
 			}
 
@@ -433,22 +431,16 @@
 			Data_Type Min;
 			Data_Type Max;
 			Data_Type Last;
+			Data_Type M2;
 
 		public:
 
-			/**
-			 * @brief Function constructor
-			 * @version 01.00.00
-			 */
+			// Constructor
 			Stream_Stats(void) : Data_Count(0), Average(0), Min(0), Max(0) {
 
 			};
 
-			/**
-			 * @brief Add Stream Data
-			 * @version 01.00.00
-			 * @param _Data Stream Data
-			 */
+			// Add Function
 			void Add(Data_Type _Data) {
 
 				// Calculate Max Value
@@ -463,6 +455,9 @@
 				if (this->Data_Count == 0) this->Average = _Data;
 				if (this->Data_Count > 0) this->Average = this->Average + ((_Data - this->Average) / this->Data_Count);
 
+				// Calculate M2 Value
+				if (this->Data_Count > 0) this->M2 += ((_Data - this->Average) * (_Data - this->Average));
+
 				// Set Last Value
 				this->Last = _Data;
 
@@ -471,10 +466,7 @@
 				
 			};
 
-			/**
-			 * @brief Clear Stream Statistic Parameters
-			 * @version 01.00.00
-			 */
+			// Clear Function
 			void Clear(void) {
 
 				// Clear Data Count
@@ -488,10 +480,7 @@
 				
 			};
 
-			/**
-			 * @brief Get stream data count
-			 * @version 01.00.00
-			 */
+			// Get Data Count Function
 			uint16_t Get_Data_Count(void) {
 
 				// Return Data Count
@@ -499,10 +488,7 @@
 
 			};
 
-			/**
-			 * @brief Get stream average
-			 * @version 01.00.00
-			 */
+			// Get Average Function
 			float Get_Average(void) {
 
 				// Return Average
@@ -510,10 +496,7 @@
 
 			};
 
-			/**
-			 * @brief Get stream minimum value
-			 * @version 01.00.00
-			 */
+			// Get Min Function
 			float Get_Min(void) {
 
 				// Return Min
@@ -521,10 +504,7 @@
 
 			};
 
-			/**
-			 * @brief Get stream maximum value
-			 * @version 01.00.00
-			 */
+			// Get Max Function
 			float Get_Max(void) {
 
 				// Return Max
@@ -532,14 +512,27 @@
 
 			};
 
-			/**
-			 * @brief Get stream last value
-			 * @version 01.00.00
-			 */
+			// Get Last Function
 			float Get_Last(void) {
 
 				// Return Max
 				return(this->Last);
+
+			};
+
+			// Get Variance Function
+			float Get_Variance(void) {
+
+				// Return Variance
+				return (this->Data_Count < 2) ? NAN : this->M2 / (this->Data_Count - 1);
+
+			};
+
+			// Get Standard Deviation Function
+			float Get_Standard_Deviation(void) {
+
+				// Return Standard Deviation
+				return (this->Data_Count < 2) ? NAN : sqrt(this->M2 / this->Data_Count);
 
 			};
 
