@@ -1,6 +1,6 @@
 {
 	"name": "Statistical",
-	"version": "2.5.2",
+	"version": "2.5.3",
 	"keywords": "Statistical, Max, Min, Average, Regression, Data, Sensor, Slope, Offset",
 	"description": "Function calculates statistical parameters of data stream and array",
 	"authors":
@@ -31,13 +31,6 @@
 			]
 		},
 		{
-			"name": "FILO_Array",
-			"base": "examples/FILO_Array/",
-			"files": [
-				"FILO_Array.ino"
-			]
-		},
-		{
 			"name": "Linear Regression",
 			"base": "examples/Linear_Regression/",
 			"files": [
@@ -49,6 +42,13 @@
 			"base": "examples/Stream/",
 			"files": [
 				"Stream.ino"
+			]
+		},
+		{
+			"name": "Vector",
+			"base": "examples/Vector/",
+			"files": [
+				"Vector.ino"
 			]
 		}
 	]
