@@ -19,7 +19,7 @@ void loop() {
 //	uint8_t Data[] = {14, 36, 21, 6, 7, 14};
 
 	// Construct Object
-	Array_Stats<float> Data_Array(Data, sizeof(Data) / sizeof(Data[0]));
+	Array_Stats<float> Data_Array(Data, 7);
 
 	// Print Stats
 	Serial.println(F("------------------------------------------------"));
