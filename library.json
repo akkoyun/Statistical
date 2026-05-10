@@ -1,0 +1,66 @@
+{
+	"name": "Statistical",
+	"version": "3.0.1",
+	"keywords": "Statistical, Array, Stream, FILO, Average, RMS, Sigma, Quartile, IQR, Variance, Regression, Slope, Offset, R2, Vector, Sensor, Filter, Embedded",
+	"description": "Ultra-low-RAM statistical library for Arduino and embedded systems. Provides array statistics (arithmetic/geometric/RMS/sigma averages, quartile, IQR, standard deviation, variance), heap-free FILO sliding window, online stream statistics (Welford algorithm), ordinary least-squares linear regression with Compute_All(), and polar vector addition.",
+	"authors":
+	{
+		"name": "Mehmet Gunce Akkoyun",
+		"email": "akkoyun@me.com",
+		"url": "https://github.com/akkoyun"
+	},
+	"license": "MIT",
+	"frameworks": "arduino",
+	"headers": "Statistical.h",
+	"platforms":
+	[
+		"atmelavr",
+		"atmelmegaavr",
+		"espressif8266",
+		"espressif32",
+		"ststm32",
+		"nordicnrf52"
+	],
+	"repository":
+	{
+		"type": "git",
+		"url": "https://github.com/akkoyun/Statistical.git"
+	},
+	"examples": [
+		{
+			"name": "Array",
+			"base": "examples/Array/",
+			"files": ["Array.ino"]
+		},
+		{
+			"name": "FILO Array",
+			"base": "examples/FILO_Array/",
+			"files": ["FILO_Array.ino"]
+		},
+		{
+			"name": "Stream",
+			"base": "examples/Stream/",
+			"files": ["Stream.ino"]
+		},
+		{
+			"name": "Linear Regression",
+			"base": "examples/Linear_Regression/",
+			"files": ["Linear_Regression.ino"]
+		},
+		{
+			"name": "Vector",
+			"base": "examples/Vector/",
+			"files": ["Vector.ino"]
+		},
+		{
+			"name": "Sigma Filter",
+			"base": "examples/Sigma_Filter/",
+			"files": ["Sigma_Filter.ino"]
+		},
+		{
+			"name": "Quartile IQR",
+			"base": "examples/Quartile_IQR/",
+			"files": ["Quartile_IQR.ino"]
+		}
+	]
+}

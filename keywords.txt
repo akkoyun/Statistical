@@ -1,0 +1,79 @@
+#######################################
+# Syntax Coloring Map For Statistical
+# v3.0.1
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+# Classes and result structs
+#######################################
+
+Array_Stats                     KEYWORD1
+FILO_Stats                      KEYWORD1
+Stream_Stats                    KEYWORD1
+Linear_Regression               KEYWORD1
+Vector_Stats                    KEYWORD1
+Regression_Result               KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+# --- Array_Stats / FILO_Stats ----
+Size                            KEYWORD2
+Sum                             KEYWORD2
+Max                             KEYWORD2
+Min                             KEYWORD2
+Sq_Sum                          KEYWORD2
+Average                         KEYWORD2
+Arithmetic_Average              KEYWORD2
+Geometric_Average               KEYWORD2
+RMS_Average                     KEYWORD2
+Ext_RMS_Average                 KEYWORD2
+Sigma_Average                   KEYWORD2
+Variance                        KEYWORD2
+Standard_Deviation              KEYWORD2
+Standard_Deviation_Error        KEYWORD2
+Coefficient_Factor              KEYWORD2
+Quartile                        KEYWORD2
+IQR                             KEYWORD2
+Bubble_Sort                     KEYWORD2
+Array                           KEYWORD2
+FILO_Add_Data                   KEYWORD2
+Set_FILO_Size                   KEYWORD2
+
+# --- FILO_Stats ------------------
+Add                             KEYWORD2
+
+# --- Stream_Stats ----------------
+Clear                           KEYWORD2
+Get_Data_Count                  KEYWORD2
+Get_Average                     KEYWORD2
+Get_Min                         KEYWORD2
+Get_Max                         KEYWORD2
+Get_Last                        KEYWORD2
+
+# --- Linear_Regression -----------
+Slope                           KEYWORD2
+Offset                          KEYWORD2
+R2                              KEYWORD2
+Compute_All                     KEYWORD2
+
+# --- Vector_Stats ----------------
+Vector_Sum                      KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+# Enum values used in API calls
+#######################################
+
+Arithmetic_Avg                  LITERAL1
+Geometric_Avg                   LITERAL1
+RMS_Avg                         LITERAL1
+Ext_RMS_Avg                     LITERAL1
+Sigma_Avg                       LITERAL1
+
+Sigma_1                         LITERAL1
+Sigma_2                         LITERAL1
+Sigma_3                         LITERAL1
+Sigma_4                         LITERAL1
